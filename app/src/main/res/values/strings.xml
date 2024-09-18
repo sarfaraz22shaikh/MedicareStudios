@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">OPD Manager</string>
+    <string name="underlined_text"><u>Resend email</u></string>
+</resources>
