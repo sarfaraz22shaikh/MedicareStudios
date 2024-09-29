@@ -1,4 +1,6 @@
 package com.developer.opdmanager;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,52 +11,82 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
+
 public class patient_login extends AppCompatActivity {
-    Button registration;
+
+    private FirebaseAuth mAuth;
+    private EditText emailField, passwordField;
+    private Button loginButton, forgetPassword, registration;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_login);
-        registration = findViewById(R.id.patient_Registration);
-        registration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(patient_login.this, patient_registration.class);
-                startActivity(intent);
-            }
-        });
-        Button login = findViewById(R.id.loginButtton);
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        // FirebaseAuth instance
+        mAuth = FirebaseAuth.getInstance();
+
+        // Email and password fields
+        emailField = findViewById(R.id.emailid);
+        passwordField = findViewById(R.id.password);
+        loginButton = findViewById(R.id.loginButtton);
+        forgetPassword = findViewById(R.id.forgetPassword);
+        registration = findViewById(R.id.patient_Registration);
+
+        // Login button listener
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.getText().toString().equals("user") && password.getText().toString().equals("1234")){
-                    Intent intent = new Intent(patient_login.this,dashboard.class);
-                    startActivity(intent);
-                    Toast.makeText(patient_login.this, "logged in", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(patient_login.this, "Wrong id/Password", Toast.LENGTH_SHORT).show();
+                String email = emailField.getText().toString().trim();
+                String password = passwordField.getText().toString().trim();
+
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    // Firebase authentication sign in with email and password
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(patient_login.this, task -> {
+                                if (task.isSuccessful()) {
+                                    // Login success, redirect to dashboard
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Toast.makeText(patient_login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+
+                                    // Navigate to dashboard
+                                    Intent intent = new Intent(patient_login.this, dashboard.class);
+                                    startActivity(intent);
+                                    finish(); // Taake user wapas login screen pe na aaye
+                                } else {
+                                    // Login failed, show error message
+                                    Toast.makeText(patient_login.this, "Login Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                } else {
+                    // Show error if fields are empty
+                    Toast.makeText(patient_login.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        Button forgetPassword = findViewById(R.id.forgetPassword);
-        forgetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(patient_login.this, forget_password.class);
-                startActivity(intent);
-            }
+
+        // Forget password button listener
+        forgetPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(patient_login.this, forget_password.class);
+            startActivity(intent);
         });
+
+        // Registration button listener
+        registration.setOnClickListener(v -> {
+            Intent intent = new Intent(patient_login.this, patient_registration.class);
+            startActivity(intent);
+        });
+
+        // Back button to navigate to main screen
         ImageView backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(patient_login.this, MainActivity.class);
-                startActivity(intent);
-            }
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(patient_login.this, MainActivity.class);
+            startActivity(intent);
         });
     }
 }

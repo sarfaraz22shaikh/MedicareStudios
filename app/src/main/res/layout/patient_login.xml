@@ -59,13 +59,13 @@
         app:layout_constraintVertical_bias="0.342" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/emailid"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:background="@drawable/button_border1"
         android:backgroundTint="@null"
         android:paddingLeft="15dp"
-        android:hint="Username"
+        android:hint="Email"
         android:drawableLeft="@drawable/baseline_person_2_24"
         android:textAlignment="textStart"
         android:textAllCaps="false"

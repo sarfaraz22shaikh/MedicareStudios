@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "390657942355",
+    "project_id": "opd-manager-f48cd",
+    "storage_bucket": "opd-manager-f48cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390657942355:android:9a0601f43679e5054337a6",
+        "android_client_info": {
+          "package_name": "com.developer.opdmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHkdryPdr85GKuszyj5iLFYPGRRV325uY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
