@@ -8,5 +8,4 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item> <!-- This makes the image circular -->
     </style>
-
 </resources>

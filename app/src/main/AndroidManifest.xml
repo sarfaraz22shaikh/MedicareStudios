@@ -12,30 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
-
-        <!-- Splash Activity -->
         <activity
             android:name=".Splashactivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Main Activity -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-
-        <!-- Other Activities -->
-        <activity android:name=".doctor_login" />
-        <activity android:name=".patient_login" />
-        <activity android:name=".doctor_registration" />
-        <activity android:name=".patient_registration" />
-        <activity android:name=".dashboard" />
-        <activity android:name=".forget_password" />
-
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".doctor_login"/>
+        <activity android:name=".patient_login"/>
+        <activity android:name=".doctor_registration"/>
+        <activity android:name=".patient_registration"/>
+        <activity android:name=".dashboard"/>
+        <activity android:name=".forget_password"/>
+        <activity android:name="doctor_registration_2"/>
     </application>
-
 </manifest>

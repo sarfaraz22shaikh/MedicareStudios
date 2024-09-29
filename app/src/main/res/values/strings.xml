@@ -1,4 +1,6 @@
 <resources>
-    <string name="app_name">OPD Manager</string>
+    <string name="app_name">Medicare +</string>
     <string name="underlined_text"><u>Resend email</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

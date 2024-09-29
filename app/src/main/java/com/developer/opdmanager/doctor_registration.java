@@ -1,5 +1,6 @@
 package com.developer.opdmanager;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,11 +33,11 @@ public class doctor_registration extends AppCompatActivity {
                 gender_view.setText("Female");
             }
         });
-        Button register = findViewById(R.id.register);
-        register.setOnClickListener(new View.OnClickListener() {
+        Button next = findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(doctor_registration.this,dashboard.class);
+                    Intent intent = new Intent(doctor_registration.this, doctor_registration_2.class);
                     startActivity(intent);
                 }
         });
