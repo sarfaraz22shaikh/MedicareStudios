@@ -33,7 +33,9 @@ public class doctor_login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(username.getText().toString().equals("user") && password.getText().toString().equals("1234")){
-                    Intent intent = new Intent(doctor_login.this,dashboard.class);
+                    Intent intent = new Intent(doctor_login.this,doctor_dashboard.class);
+                    Booking newBooking = new Booking("Prasad Chinchole", "8:00 to 8:15 AM", "1");
+                    intent.putExtra("newBooking", newBooking);
                     startActivity(intent);
                     Toast.makeText(doctor_login.this, "logged in", Toast.LENGTH_SHORT).show();
                 }

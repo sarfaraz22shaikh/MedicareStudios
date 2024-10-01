@@ -65,15 +65,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.178" />
 
-        <EditText
-            android:id="@+id/location"
+        <AutoCompleteTextView
+            android:id="@+id/locationAutoComplete"
             android:layout_width="300dp"
             android:layout_height="49dp"
             android:background="@drawable/button_border"
             android:backgroundTint="@null"
             android:drawableLeft="@drawable/baseline_call_end_24"
             android:drawablePadding="5dp"
-            android:hint="Location"
+            android:hint="City"
             android:inputType="text"
             android:paddingLeft="15dp"
             android:textAlignment="textStart"
