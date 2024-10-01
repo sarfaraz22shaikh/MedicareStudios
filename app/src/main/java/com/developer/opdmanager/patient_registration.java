@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class patient_registration extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth db;
     private EditText emailField, passwordField;
     private Button registerButton;
 
@@ -31,7 +31,7 @@ public class patient_registration extends AppCompatActivity {
         registerButton = findViewById(R.id.register); // Register button
 
         // FirebaseAuth instance
-        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseAuth.getInstance();
 
         // RadioButton logic for gender selection
         RadioButton checkboxMale = findViewById(R.id.checkbox_male);
@@ -59,11 +59,11 @@ public class patient_registration extends AppCompatActivity {
 
             if (!email.isEmpty() && !password.isEmpty()) {
                 // Create new user with email and password
-                mAuth.createUserWithEmailAndPassword(email, password)
+                db.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
                                 // Registration successful
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                FirebaseUser user = db.getCurrentUser();
                                 Toast.makeText(patient_registration.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
                             } else {
                                 // Registration failed
