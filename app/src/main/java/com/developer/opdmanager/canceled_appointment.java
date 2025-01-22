@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * Use the {@link canceled_appointment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class canceled_appointment extends Fragment {
+public class  canceled_appointment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

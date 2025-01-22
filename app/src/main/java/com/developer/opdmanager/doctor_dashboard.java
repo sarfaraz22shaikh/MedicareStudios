@@ -17,8 +17,6 @@ import java.util.List;
 
 public class doctor_dashboard extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private BookingAdapter bookingAdapter;
-    private List<Booking> bookingList;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.doctor_dashboard);
@@ -29,14 +27,6 @@ public class doctor_dashboard extends AppCompatActivity {
         textView.setText(spannableString);
 
         recyclerView = findViewById(R.id.favoritesRecyclerView);
-        bookingList = new ArrayList<>();
-        bookingAdapter = new BookingAdapter(bookingList);
-        recyclerView.setAdapter(bookingAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        if (getIntent().hasExtra("newBooking")) {
-            Booking newBooking = (Booking) getIntent().getSerializableExtra("newBooking");
-            bookingAdapter.addBooking(newBooking);
-        }
     }
 }

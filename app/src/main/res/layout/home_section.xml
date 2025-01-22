@@ -39,7 +39,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/search_button"
             android:layout_width="160dp"
             android:layout_height="160dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -271,6 +271,7 @@
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/openDoctorInfo"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_gravity="center"

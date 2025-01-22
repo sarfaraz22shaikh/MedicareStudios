@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation ("com.google.firebase:firebase-firestore:25.1.1")
+
     implementation("com.loopj.android:android-async-http:1.4.9")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.airbnb.android:lottie:6.5.2")

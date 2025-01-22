@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
+
         <activity
-            android:name=".doctor_info_card"
+            android:name=".Splashactivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,15 +24,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".doctor_login"/>
-        <activity android:name=".patient_login"/>
-        <activity android:name=".doctor_registration"/>
-        <activity android:name=".patient_registration"/>
-        <activity android:name=".dashboard"/>
-        <activity android:name=".forget_password"/>
-        <activity android:name="doctor_registration_2"/>
-        <activity android:name=".doctor_dashboard"/>
-
+        <activity android:name=".MainActivity" />
+        <activity android:name=".doctor_login" />
+        <activity android:name=".patient_login" />
+        <activity android:name=".doctor_registration" />
+        <activity android:name=".patient_registration" />
+        <activity android:name=".dashboard" />
+        <activity android:name=".forget_password" />
+        <activity android:name=".doctor_registration_2" />
+        <activity android:name=".doctor_dashboard" />
+        <activity android:name=".search_doctor"/>
+        <activity android:name=".doctor_info_card"/>
+        <activity android:name=".BookingActivity"/>
     </application>
+
 </manifest>
