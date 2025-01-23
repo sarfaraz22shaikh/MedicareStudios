@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F5F5"
+    tools:context=".BookingActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+
+
+
+            <!-- Booking Info -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dr Prasad's online booking opens at 07:00 AM"
+                android:textColor="#009688"
+                android:paddingBottom="16dp"
+                android:textSize="14sp" />
+
+            <!-- Date Selector -->
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today\n20 Jan"
+                        android:textAlignment="center"
+                        android:padding="16dp"
+                        android:textStyle="bold"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tomorrow\n21 Jan"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:padding="16dp"
+                        android:textColor="#888" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wed\n22 Jan"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:padding="16dp"
+                        android:textColor="#888"
+                        app:tabIndicatorColor="@color/black"
+                        />
+
+                    <ImageView
+                        android:id="@+id/select_date_icon"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/calendar"
+                        android:layout_marginLeft="25dp"
+                        android:paddingHorizontal="15dp"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Time Slots -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/favoritesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                     />
+            </LinearLayout>
+
+            <!-- Important Note -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Important Note"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Leave Notice\n18-Jan To 22-Jan"
+                android:background="#FFF9C4"
+                android:padding="16dp"
+                android:textSize="14sp"
+                android:textColor="#000" />
+        </LinearLayout>
+    </ScrollView>
