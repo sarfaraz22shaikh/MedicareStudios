@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "627738902448",
+    "firebase_url": "https://medicarestudios-default-rtdb.firebaseio.com",
+    "project_id": "medicarestudios",
+    "storage_bucket": "medicarestudios.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627738902448:android:f13102748bd4b9a259a075",
+        "android_client_info": {
+          "package_name": "com.developer.opdmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ5rQ-X3oUoTJXsIwP_haOmG9lBGZYKIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

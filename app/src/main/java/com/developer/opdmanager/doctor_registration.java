@@ -28,8 +28,8 @@ public class doctor_registration extends AppCompatActivity {
         setContentView(R.layout.patient_registration);
 
         // Linking XML fields to Java code
-        emailField = findViewById(R.id.button6); // Email field
-        passwordField = findViewById(R.id.button10); // Password field
+        emailField = findViewById(R.id.emailInput); // Email field
+        passwordField = findViewById(R.id.passwordInput); // Password field
         registerButton = findViewById(R.id.register); // Register button
 
         // FirebaseAuth instance

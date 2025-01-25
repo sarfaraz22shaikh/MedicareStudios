@@ -36,7 +36,7 @@ public class doctor_info_card extends AppCompatActivity {
         book_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(doctor_info_card.this,BookingActivity.class);
+                Intent intent = new Intent(doctor_info_card.this , BookingActivity.class);
                 startActivity(intent);
             }
         });
