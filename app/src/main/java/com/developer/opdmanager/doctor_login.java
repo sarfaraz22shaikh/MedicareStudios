@@ -10,14 +10,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
+
 
 public class doctor_login extends AppCompatActivity {
     Button registration;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.doctor_login);
-
+        // FirebaseAuth instance
+        mAuth = FirebaseAuth.getInstance();
 
 
         registration = findViewById(R.id.DocRegister);
@@ -36,13 +43,30 @@ public class doctor_login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.getText().toString().equals("user") && password.getText().toString().equals("1234")){
-                    Intent intent = new Intent(doctor_login.this,doctor_dashboard.class);
-                    startActivity(intent);
-                    Toast.makeText(doctor_login.this, "logged in", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(doctor_login.this, "Wrong id/Password", Toast.LENGTH_SHORT).show();
+                String email = username.getText().toString().trim();
+                String pass = password.getText().toString().trim();
+
+                if (!email.isEmpty() && ! pass.isEmpty()) {
+                    // Firebase authentication sign in with email and password
+                    mAuth.signInWithEmailAndPassword(email, pass)
+                            .addOnCompleteListener(doctor_login.this, task -> {
+                                if (task.isSuccessful()) {
+                                    // Login success, redirect to dashboard
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Toast.makeText(doctor_login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+
+                                    // Navigate to dashboard
+                                    Intent intent = new Intent(doctor_login.this, doctor_dashboard.class);
+                                    startActivity(intent);
+                                    finish(); // Taake user wapas login screen pe na aaye
+                                } else {
+                                    // Login failed, show error message
+                                    Toast.makeText(doctor_login.this, "Login Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                } else {
+                    // Show error if fields are empty
+                    Toast.makeText(doctor_login.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
