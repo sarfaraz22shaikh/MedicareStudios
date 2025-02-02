@@ -17,11 +17,15 @@ public class doctor_login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.doctor_login);
+
+
+
         registration = findViewById(R.id.DocRegister);
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(doctor_login.this, doctor_registration.class);
+                Toast.makeText(doctor_login.this, "Registration button clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(doctor_login.this , doctor_registration.class);
                 startActivity(intent);
             }
         });

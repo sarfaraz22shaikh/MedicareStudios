@@ -3,6 +3,7 @@ package com.developer.opdmanager;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,17 @@ public class patient_login extends AppCompatActivity {
 
         // FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.d( "patient login", "onCreate: " + currentUser);
+
+        if (currentUser != null) {
+            // User is already logged in, redirect to HomeActivity
+            Intent intent = new Intent(patient_login.this, dashboard.class);
+            startActivity(intent);
+            finish();
+            return; // Exit this method as we don't need to show the login UI
+        }
 
         // Email and password fields
         emailField = findViewById(R.id.emailid);

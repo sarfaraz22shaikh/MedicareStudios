@@ -1,8 +1,9 @@
 {
   "project_info": {
     "project_number": "390657942355",
+    "firebase_url": "https://opd-manager-f48cd-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "opd-manager-f48cd",
-    "storage_bucket": "opd-manager-f48cd.appspot.com"
+    "storage_bucket": "opd-manager-f48cd.firebasestorage.app"
   },
   "client": [
     {
