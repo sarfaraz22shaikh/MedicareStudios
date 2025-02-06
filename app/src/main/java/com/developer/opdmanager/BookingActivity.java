@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.tabs.TabItem;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -15,7 +17,7 @@ import java.util.Locale;
 public class BookingActivity extends AppCompatActivity {
 
     private TextView selectedDateText;
-    private ImageView selectDateIcon;
+    private TabItem selectDateIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

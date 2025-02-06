@@ -2,6 +2,7 @@ package com.developer.opdmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ public class doctor_login extends AppCompatActivity {
         // FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
 
+        FirebaseAuth.getInstance().signOut();
 
         registration = findViewById(R.id.DocRegister);
         registration.setOnClickListener(new View.OnClickListener() {

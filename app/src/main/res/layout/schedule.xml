@@ -1,112 +1,161 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F5F5F5"
-    tools:context=".BookingActivity">
+    android:background="#F5F5F5">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Doctor Profile Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView10"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:shapeAppearanceOverlay="@style/CircleImageViewStyle"
+                app:srcCompat="@drawable/oq6utw0" />
 
-
-
-            <!-- Booking Info -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dr Prasad's online booking opens at 07:00 AM"
-                android:textColor="#009688"
-                android:paddingBottom="16dp"
-                android:textSize="14sp" />
-
-            <!-- Date Selector -->
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Today\n20 Jan"
-                        android:textAlignment="center"
-                        android:padding="16dp"
-                        android:textStyle="bold"
-                        android:textColor="#000" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tomorrow\n21 Jan"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:padding="16dp"
-                        android:textColor="#888" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Wed\n22 Jan"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:padding="16dp"
-                        android:textColor="#888"
-                        app:tabIndicatorColor="@color/black"
-                        />
-
-                    <ImageView
-                        android:id="@+id/select_date_icon"
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/calendar"
-                        android:layout_marginLeft="25dp"
-                        android:paddingHorizontal="15dp"/>
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <!-- Time Slots -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="16dp">
+                android:paddingStart="16dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/favoritesRecyclerView"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                     />
-            </LinearLayout>
+                    android:text="Dr Prasad Chinchole"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
 
-            <!-- Important Note -->
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dermatologist, MD, MBBS"
+                    android:textSize="14sp"
+                    android:textColor="#555555" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Methaji Mala (Shri Datta Skin  Cosmetic Clinic)"
+                    android:textSize="12sp"
+                    android:textColor="#777777" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Booking Info Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dr Chinchole’s online booking opens at 07:00 AM"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="#666666"
+            android:background="#E0F7FA" />
+
+        <!-- Date Selection Tabs -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutDates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:layout_marginTop="7dp"
+            app:tabMode="scrollable"
+            app:tabIndicatorColor="#000000"
+            app:tabSelectedTextColor="#000000"
+            app:tabTextColor="#888888">
+
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Important Note"
-                android:textStyle="bold"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:textSize="16sp"
-                android:textColor="#000" />
+                android:text="Today\n25 Jan" />
 
-            <TextView
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tomorrow\n26 Jan" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mon\n27 Jan" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/select_date_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout="@drawable/date_selection"
+                />
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- Slots Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <!-- Single Slot -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Leave Notice\n18-Jan To 22-Jan"
-                android:background="#FFF9C4"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
                 android:padding="16dp"
-                android:textSize="14sp"
-                android:textColor="#000" />
+                android:layout_marginBottom="8dp"
+                android:elevation="2dp">
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/dawn" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00 AM - 10:30 AM"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sat Morn"
+                        android:textColor="#777777"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Online booking for this time slot has been full."
+                        android:textColor="#FF5555"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+</ScrollView>

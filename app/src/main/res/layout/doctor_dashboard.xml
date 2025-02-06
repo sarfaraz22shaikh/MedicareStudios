@@ -19,6 +19,7 @@
         app:srcCompat="@drawable/oq6utw0" />
 
     <TextView
+        android:id="@id/doctor_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dr.Prasad\nChinchole"
@@ -57,7 +58,7 @@
         app:srcCompat="@drawable/baseline_star_24" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/specialization"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Therapist"
@@ -71,7 +72,7 @@
         app:layout_constraintVertical_bias="0.191" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/textView213"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4.9"
@@ -107,12 +108,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favoritesRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:paddingTop="290dp"
+        android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.516" />
+        app:layout_constraintVertical_bias="0.645" />
 </androidx.constraintlayout.widget.ConstraintLayout>
