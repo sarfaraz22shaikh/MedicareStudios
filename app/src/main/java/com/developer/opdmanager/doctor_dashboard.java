@@ -59,6 +59,7 @@ public class doctor_dashboard extends AppCompatActivity {
 
 
     }
+
     private void fetchDoctorData() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -71,19 +72,22 @@ public class doctor_dashboard extends AppCompatActivity {
             db.collection("doctors").document(userId).get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            String name = documentSnapshot.getString("name");
+                            // ✅ Use the correct field names (check Firestore Console)
+                            String name = documentSnapshot.getString("name");  // Changed "Name" → "name"
                             String speciality = documentSnapshot.getString("specialization");
+
                             if (name != null) {
-                                String[] nameParts = name.split(" ",2);
-                                specialization.setText(speciality);
+                                String[] nameParts = name.split(" ", 2);
+                                specialization.setText(speciality != null ? speciality : "No specialization found");
+
                                 if (nameParts.length > 1) {
-                                    doctorName.setText("Dr." + nameParts[0] + "\n" + nameParts[1]);
+                                    doctorName.setText("Dr. " + nameParts[0] + "\n" + nameParts[1]);
                                 } else {
-                                    doctorName.setText(name);
+                                    doctorName.setText("Dr. " + nameParts[0]);
                                 }
                             } else {
                                 doctorName.setText("No name found");
-                                specialization.setText("No name found");
+                                specialization.setText("No specialization found");
                             }
                         } else {
                             doctorName.setText("No data available");
@@ -96,5 +100,6 @@ public class doctor_dashboard extends AppCompatActivity {
             Log.e("FirestoreFetch", "No user is logged in");
         }
     }
+
 
 }

@@ -1,26 +1,19 @@
 package com.developer.opdmanager;
-
-import static androidx.fragment.app.FragmentManager.TAG;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -85,7 +78,18 @@ public class doctor_registration extends AppCompatActivity {
 
             // Validate user inputs
             if (validateInputs(name, phonenum, email, password, gender)) {
-                registerUser(name, phonenum, email, password, gender);
+
+                registerUser(email,password);
+
+                Intent intent = new Intent(this, doctor_registration_2.class);
+                intent.putExtra("name" , name);
+                intent.putExtra("email" , email);
+                intent.putExtra("phoneNumber" , phonenum);
+                intent.putExtra("gender" , gender);
+
+                Toast.makeText(this, "Data is sended through intent", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -118,12 +122,13 @@ public class doctor_registration extends AppCompatActivity {
     }
 
     // Register user in Firebase Authentication and save data in Realtime Database
-    private void registerUser(String name, String phoneNumber, String email, String password, String gender) {
+    private void registerUser(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        String userId = mAuth.getCurrentUser().getUid(); // Get the unique Firebase UID
-                        saveUserData(userId, name, phoneNumber, email, gender); // Save data to Firebase
+//                        String userId = mAuth.getCurrentUser().getUid(); // Get the unique Firebase UID
+//                        saveUserData(userId, name, phoneNumber, email, gender); // Save data to Firebase
+                        Toast.makeText(this, "Authentication complete", Toast.LENGTH_SHORT).show();
                     } else {
                         handleRegistrationError(task.getException());
                     }
@@ -132,17 +137,17 @@ public class doctor_registration extends AppCompatActivity {
 
     // Save user data to Firebase Realtime Database
     private void saveUserData(String userId, String name, String phoneNumber, String email, String gender) {
-        HashMap<String, Object> userMap = new HashMap<>();
-        userMap.put("name", name);
-        userMap.put("email", email);
-        userMap.put("phoneNumber", phoneNumber);
-        userMap.put("gender", gender);  // Add gender data to user data
+        HashMap<String, Object> doctors = new HashMap<>();
+        doctors.put("name", name);
+        doctors.put("email", email);
+        doctors.put("phoneNumber", phoneNumber);
+        doctors.put("gender", gender);  // Add gender data to user data
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         mAuth.getCurrentUser();
         if(mAuth != null) {
             String uid = mAuth.getUid();
 
-            db.collection("doctors").document(userId).set(userMap)
+            db.collection("doctors").document(userId).set(doctors)
                     .addOnSuccessListener(unused -> {
                         Log.d(TAG, "User data saved successfully");
                         Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();

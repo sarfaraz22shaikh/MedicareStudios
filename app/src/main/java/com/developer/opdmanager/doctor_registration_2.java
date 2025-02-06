@@ -4,29 +4,21 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class doctor_registration_2 extends AppCompatActivity {
     private AutoCompleteTextView locationAutoComplete;
@@ -53,13 +45,14 @@ public class doctor_registration_2 extends AppCompatActivity {
             String experience = professional_exp.getText().toString().trim();
             String locate = location.getText().toString().trim();
 
-//             Fetch user data
-            fetchUserData();
+
+
 
 //             Validate user inputs and save data
-//            if (validateInputs(spec, experience, locate)) {
-//                saveUserData(spec, experience, locate);
-//            }
+            if (validateInputs(spec, experience, locate)) {
+                Toast.makeText(this, "The data is valid now sending to saveUser", Toast.LENGTH_SHORT).show();
+                saveUserData();
+            }
         });
 
         // Get current user ID
@@ -85,126 +78,46 @@ public class doctor_registration_2 extends AppCompatActivity {
         return true;
     }
 
-    public void saveUserData(String name , String email , String phonenumber , String gender ,  String spec, String experience, String location) {
-        Map<String, Object> doctors = new HashMap<>();
-        doctors.put("Name", name);
-        doctors.put("Email", email);
-        doctors.put("PhoneNumber", phonenumber);
-        doctors.put("Gender", gender);
-        doctors.put("specialization", spec);
-        doctors.put("year_of_experience", experience);
-        doctors.put("location", location);
+    public void saveUserData() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
 
-        db.collection("doctors")
-                .add(doctors)
-                .addOnSuccessListener(documentReference ->
-                        Log.d("Firestore", "Document added with ID: " + documentReference.getId())
-                )
-                .addOnFailureListener(e ->
-                        Log.w("Firestore", "Error adding document", e));
-        Intent intent = new Intent(doctor_registration_2.this , doctor_login.class);
-        startActivity(intent);
-        finish();
-    }
+        if (currentUser != null) {
+            String userId = currentUser.getUid();  // ✅ Get the authenticated user's UID
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private void fetchUserData() {
-        if (userId == null) {
-            Log.e("Firebase", "User ID is null");
-            return;
+            Intent intent = getIntent();
+            String name = intent.getStringExtra("name");
+            String email = intent.getStringExtra("email");
+            String phoneNumber = intent.getStringExtra("phonenum");
+            String gender = intent.getStringExtra("gender");
+            String spec = specialization.getText().toString().trim();
+            String experience = professional_exp.getText().toString().trim();
+            String locate = location.getText().toString().trim();
+
+            Map<String, Object> doctors = new HashMap<>();
+            doctors.put("name", name);  // ✅ Make sure field names match Firestore
+            doctors.put("email", email);
+            doctors.put("phoneNumber", phoneNumber);
+            doctors.put("gender", gender);
+            doctors.put("specialization", spec);
+            doctors.put("year_of_experience", experience);
+            doctors.put("location", locate);
+
+            // ✅ Store data using UID instead of generating a random ID
+            db.collection("doctors").document(userId)
+                    .set(doctors)
+                    .addOnSuccessListener(aVoid -> {
+                        Log.d("Firestore", "Doctor data saved successfully with ID: " + userId);
+                        Intent intentNext = new Intent(doctor_registration_2.this, doctor_login.class);
+                        startActivity(intentNext);
+                        finish();
+                    })
+                    .addOnFailureListener(e -> Log.w("Firestore", "Error saving doctor data", e));
+        } else {
+            Log.e("Firestore", "No user is logged in. Cannot save doctor data.");
         }
-
-        DatabaseReference emailRef = FirebaseDatabase.getInstance().getReference()
-                .child("Doctors") // Make sure this matches your database structure
-                .child(userId)  // Fetch data for the specific user
-                .child("email"); // Get the email field
-
-        emailRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String email = snapshot.getValue(String.class);
-                    Toast.makeText(doctor_registration_2.this, email, Toast.LENGTH_SHORT).show();
-                    fetchGender(email);
-                } else {
-                    Toast.makeText(doctor_registration_2.this, "Email not found", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Firebase", "Error fetching email: " + error.getMessage());
-            }
-        });
     }
 
 
-    private void fetchGender(String email) {
-        DatabaseReference genderRef = FirebaseDatabase.getInstance().getReference()
-                .child("Doctors") // Make sure this matches your database structure
-                .child(userId)  // Fetch data for the specific user
-                .child("gender");
-
-        genderRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String gender = snapshot.exists() ? snapshot.getValue(String.class) : "N/A";
-                fetchName(email, gender);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Firebase", "Error fetching gender: " + error.getMessage());
-            }
-        });
-    }
-
-    private void fetchName(String email, String gender) {
-
-        DatabaseReference nameRef = FirebaseDatabase.getInstance().getReference()
-                .child("Doctors") // Make sure this matches your database structure
-                .child(userId)  // Fetch data for the specific user
-                .child("name");
-
-
-        nameRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String name = snapshot.exists() ? snapshot.getValue(String.class) : "N/A";
-                fetchPhoneNumber(email, gender, name);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Firebase", "Error fetching name: " + error.getMessage());
-            }
-        });
-    }
-
-    private void fetchPhoneNumber(String email, String gender, String name) {
-
-        DatabaseReference phoneRef = FirebaseDatabase.getInstance().getReference()
-                .child("Doctors") // Make sure this matches your database structure
-                .child(userId)  // Fetch data for the specific user
-                .child("phoneNumber");
-
-        phoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String phoneNumber = snapshot.exists() ? snapshot.getValue(String.class) : "N/A";
-                Toast.makeText(doctor_registration_2.this, email + " " + gender + " " + name + " " + phoneNumber, Toast.LENGTH_SHORT).show();
-
-                String spec = specialization.getText().toString().trim();
-                String experience = professional_exp.getText().toString().trim();
-                String locate = location.getText().toString().trim();
-
-                    saveUserData( name , email , phoneNumber , gender ,spec, experience, locate);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Firebase", "Error fetching phone number: " + error.getMessage());
-            }
-        });
-    }
 }
