@@ -38,6 +38,7 @@ public class doctor_dashboard extends AppCompatActivity {
     private RecyclerView recyclerView;
     public TextView doctorName;
     private String userId;
+    private TextView specialization;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.doctor_dashboard);
@@ -47,20 +48,53 @@ public class doctor_dashboard extends AppCompatActivity {
         TextView textView = findViewById(R.id.formaltext);
         textView.setText(spannableString);
         doctorName = findViewById(R.id.doctor_name);
-        TextView specialization = findViewById(R.id.specialization);
+        specialization = findViewById(R.id.specialization);
         recyclerView = findViewById(R.id.favoritesRecyclerView);
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        fetchDoctorData();
 
-        FirebaseUser currentUser = auth.getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid(); // Get user ID
-
-        }
         BookingsAdapter adapter = new BookingsAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
     }
+    private void fetchDoctorData() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            Log.d("FirestoreFetch", "Fetching data for User ID: " + userId);
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("doctors").document(userId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String name = documentSnapshot.getString("name");
+                            String speciality = documentSnapshot.getString("specialization");
+                            if (name != null) {
+                                String[] nameParts = name.split(" ",2);
+                                specialization.setText(speciality);
+                                if (nameParts.length > 1) {
+                                    doctorName.setText("Dr." + nameParts[0] + "\n" + nameParts[1]);
+                                } else {
+                                    doctorName.setText(name);
+                                }
+                            } else {
+                                doctorName.setText("No name found");
+                                specialization.setText("No name found");
+                            }
+                        } else {
+                            doctorName.setText("No data available");
+                            specialization.setText("No data available");
+                            Log.e("FirestoreData", "No document found for userId: " + userId);
+                        }
+                    })
+                    .addOnFailureListener(e -> Log.e("FirestoreError", "Error fetching data", e));
+        } else {
+            Log.e("FirestoreFetch", "No user is logged in");
+        }
+    }
+
 }

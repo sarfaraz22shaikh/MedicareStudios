@@ -45,7 +45,7 @@ dependencies {
     // Add the dependency for the Realtime Database library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-database")
-
+    implementation ("com.jakewharton.threetenabp:threetenabp:1.4.6")
     implementation("com.loopj.android:android-async-http:1.4.9")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.airbnb.android:lottie:6.5.2")

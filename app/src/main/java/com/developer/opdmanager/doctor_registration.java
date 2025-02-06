@@ -1,6 +1,7 @@
 package com.developer.opdmanager;
 
 import static androidx.fragment.app.FragmentManager.TAG;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -136,14 +137,19 @@ public class doctor_registration extends AppCompatActivity {
         userMap.put("email", email);
         userMap.put("phoneNumber", phoneNumber);
         userMap.put("gender", gender);  // Add gender data to user data
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        mAuth.getCurrentUser();
+        if(mAuth != null) {
+            String uid = mAuth.getUid();
 
-        databaseReference.child(userId).setValue(userMap)
-                .addOnSuccessListener(unused -> {
-                    Log.d(TAG, "User data saved successfully");
-                    Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                    navigateToDoctor2(); // Navigate to login activity
-                })
-                .addOnFailureListener(this::handleDatabaseError);
+            db.collection("doctors").document(userId).set(userMap)
+                    .addOnSuccessListener(unused -> {
+                        Log.d(TAG, "User data saved successfully");
+                        Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                        navigateToDoctor2(); // Navigate to login activity
+                    })
+                    .addOnFailureListener(this::handleDatabaseError);
+        }
     }
 
     // Handle registration errors
