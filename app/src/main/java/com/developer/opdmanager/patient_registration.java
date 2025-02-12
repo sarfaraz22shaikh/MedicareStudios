@@ -14,10 +14,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class patient_registration extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class patient_registration extends AppCompatActivity {
     private Button registerButton;
     private RadioGroup genderGroup;
     private FirebaseAuth mAuth;
-    private DatabaseReference databaseReference;
+    private FirebaseFirestore db;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -38,7 +38,7 @@ public class patient_registration extends AppCompatActivity {
         // Initialize UI elements
         initializeViews();
 
-        // Initialize Firebase Authentication and Database Reference
+        // Initialize Firebase Authentication and Firestore
         initializeFirebase();
 
         // Set up the register button click event
@@ -58,8 +58,7 @@ public class patient_registration extends AppCompatActivity {
     // Initialize Firebase
     private void initializeFirebase() {
         mAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://opd-manager-f48cd-default-rtdb.asia-southeast1.firebasedatabase.app");
-        databaseReference = database.getReference("Patients");
+        db = FirebaseFirestore.getInstance();
     }
 
     // Handle register button click event
@@ -107,34 +106,38 @@ public class patient_registration extends AppCompatActivity {
         return selectedGenderButton != null ? selectedGenderButton.getText().toString() : "";
     }
 
-    // Register user in Firebase Authentication and save data in Realtime Database
+    // Register user in Firebase Authentication and save data in Firestore
     private void registerUser(String name, String phoneNumber, String email, String password, String gender) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         String userId = mAuth.getCurrentUser().getUid(); // Get the unique Firebase UID
-                        saveUserData(userId, name, phoneNumber, email, gender); // Save data to Firebase
+                        saveUserData(userId, name, phoneNumber, email, gender); // Save data to Firestore
                     } else {
                         handleRegistrationError(task.getException());
                     }
                 });
     }
 
-    // Save user data to Firebase Realtime Database
+    // Save user data to Firestore
     private void saveUserData(String userId, String name, String phoneNumber, String email, String gender) {
-        HashMap<String, Object> userMap = new HashMap<>();
+        Map<String, Object> userMap = new HashMap<>();
         userMap.put("name", name);
         userMap.put("email", email);
         userMap.put("phoneNumber", phoneNumber);
-        userMap.put("gender", gender);  // Add gender data to user data
+        userMap.put("gender", gender);
+        userMap.put("role", "patient");  // Add role for user type identification
 
-        databaseReference.child(userId).setValue(userMap)
+        // Save to Firestore collection "users" with document ID as userId
+        db.collection("Patients")
+                .document(userId)
+                .set(userMap)
                 .addOnSuccessListener(unused -> {
                     Log.d(TAG, "User data saved successfully");
                     Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                    navigateToLogin(); // Navigate to login activity
+                    navigateToLogin();
                 })
-                .addOnFailureListener(this::handleDatabaseError);
+                .addOnFailureListener(e -> handleDatabaseError(e));
     }
 
     // Handle registration errors

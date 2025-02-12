@@ -27,7 +27,17 @@ public class doctor_login extends AppCompatActivity {
         // FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseAuth.getInstance().signOut();
+//        mAuth =  FirebaseAuth.getInstance().signOut();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            // User is already logged in, redirect to HomeActivity
+            Intent intent = new Intent(doctor_login.this, doctor_dashboard.class);
+            startActivity(intent);
+            finish();
+            return; // Exit this method as we don't need to show the login UI
+        }
+
 
         registration = findViewById(R.id.DocRegister);
         registration.setOnClickListener(new View.OnClickListener() {
