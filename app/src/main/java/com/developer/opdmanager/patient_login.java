@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -35,13 +36,41 @@ public class patient_login extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         Log.d( "patient login", "onCreate: " + currentUser);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         if (currentUser != null) {
-            // User is already logged in, redirect to HomeActivity
-            Intent intent = new Intent(patient_login.this, dashboard.class);
-            startActivity(intent);
-            finish();
-            return; // Exit this method as we don't need to show the login UI
+            String userId = currentUser.getUid();
+
+            // Check in "Doctors" collection
+            db.collection("Doctors").document(userId).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult().exists()) {
+                    String collectionName = "Doctors";
+                    Toast.makeText(getApplicationContext(), "User found in: " + collectionName, Toast.LENGTH_SHORT).show();
+                } else {
+                    // Check in "Patients" collection if not found in "Doctors"
+                    db.collection("Patients").document(userId).get().addOnCompleteListener(task2 -> {
+                        if (task2.isSuccessful() && task2.getResult().exists()) {
+                            String collectionName = "Patients";
+                            Toast.makeText(getApplicationContext(), "User found in: " + collectionName, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(patient_login.this, dashboard.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "User not found in any collection!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
         }
+
+//        if (currentUser != null) {
+//            // User is already logged in, redirect to HomeActivity
+//            Intent intent = new Intent(patient_login.this, dashboard.class);
+//            startActivity(intent);
+//            finish();
+//            return; // Exit this method as we don't need to show the login UI
+//        }
 
         // Email and password fields
         emailField = findViewById(R.id.emailid);
