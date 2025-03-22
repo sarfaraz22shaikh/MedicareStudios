@@ -1,120 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Guideline for better positioning -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!-- Doctor Profile Image -->
+
+    <!-- Welcome Text -->
+
+    <!-- Doctor Name -->
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView10"
-        android:layout_width="149dp"
-        android:layout_height="149dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toTopOf="@id/doctor_name"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.048"
+        app:layout_constraintVertical_bias="1.0"
         app:shapeAppearanceOverlay="@style/CircleImageViewStyle"
         app:srcCompat="@drawable/oq6utw0" />
 
     <TextView
-        android:id="@id/doctor_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dr.Prasad\nChinchole"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.829"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
-
-    <TextView
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome,"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.792"
+        app:layout_constraintHorizontal_bias="0.886"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView63"
+    <TextView
+        android:id="@+id/doctor_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Dr. Prasad Chinchole"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/welcomeText"
+        app:layout_constraintStart_toEndOf="@id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.591"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.229"
-        app:srcCompat="@drawable/baseline_star_24" />
+        app:layout_constraintBottom_toTopOf="@id/specialization" />
 
+    <!-- Specialization -->
     <TextView
         android:id="@+id/specialization"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Therapist"
         android:textColor="#B0000000"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/doctor_name"
+        app:layout_constraintStart_toStartOf="@id/doctor_name"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Star Rating Icon -->
+    <ImageView
+        android:id="@+id/imageView63"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toBottomOf="@id/specialization"
+        app:layout_constraintStart_toStartOf="@id/specialization"
+        app:layout_constraintEnd_toStartOf="@id/textView213"
+        app:srcCompat="@drawable/baseline_star_24" />
+
+    <!-- Rating -->
     <TextView
         android:id="@+id/textView213"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4.9"
         android:textColor="#B0000000"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.234" />
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/specialization"
+        app:layout_constraintStart_toEndOf="@id/imageView63" />
 
+    <!-- Today's Appointments Title -->
     <TextView
         android:id="@+id/formaltext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_border"
         android:backgroundTint="#FF3CE7CA"
-        android:paddingHorizontal="30dp"
+        android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:textStyle="bold"
         android:text="Today's Appointments"
-        android:justificationMode="inter_word"
+        android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/imageView63"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
 
+    <!-- RecyclerView for Appointments -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoritesRecyclerView"
-        android:layout_width="match_parent"
-        android:paddingTop="290dp"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="10dp"
+        android:id="@+id/appointmentsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/formaltext"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
