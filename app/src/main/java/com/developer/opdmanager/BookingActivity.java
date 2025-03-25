@@ -1,8 +1,10 @@
 package com.developer.opdmanager;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ public class BookingActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    private TextView selectedDateText;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -41,12 +44,12 @@ public class BookingActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-
+        TextView timeDetail = findViewById(R.id.timeDetail);
         TextView doctorName = findViewById(R.id.DoctorName);
         String name = getIntent().getStringExtra("doctor_name");
         String doctorId = getIntent().getStringExtra("doctor_id");
         doctorName.setText("Dr " + name);
-
+        timeDetail.setText("Dr "+name + " online booking opens at 07:00 AM");
         TabLayout tabLayout = findViewById(R.id.tabLayoutDates);
 
         String today = getFormattedDate(0);
@@ -62,7 +65,7 @@ public class BookingActivity extends AppCompatActivity {
             tabLayout.getTabAt(2).setText("Day After\n" + dayAfterTomorrow);
         }
 
-//        selectDateIcon = findViewById(R.id.select_date_icon);
+        selectDateIcon = findViewById(R.id.select_date_icon);
 //
 //        selectDateIcon.setOnClickListener(view -> showDatePicker());
         // Example: Handling a single slot (Repeat this for other slots)
