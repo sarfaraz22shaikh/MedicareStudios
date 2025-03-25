@@ -59,6 +59,7 @@
 
         <!-- Booking Info Section -->
         <TextView
+            android:id="@+id/timeDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dr Chinchole's online booking opens at 07:00 AM"

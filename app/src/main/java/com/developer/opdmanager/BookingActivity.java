@@ -1,20 +1,26 @@
 package com.developer.opdmanager;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -25,6 +31,7 @@ public class BookingActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    private TextView selectedDateText;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -37,13 +44,28 @@ public class BookingActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-
+        TextView timeDetail = findViewById(R.id.timeDetail);
         TextView doctorName = findViewById(R.id.DoctorName);
         String name = getIntent().getStringExtra("doctor_name");
         String doctorId = getIntent().getStringExtra("doctor_id");
         doctorName.setText("Dr " + name);
+        timeDetail.setText("Dr "+name + " online booking opens at 07:00 AM");
+        TabLayout tabLayout = findViewById(R.id.tabLayoutDates);
 
-//        selectDateIcon = findViewById(R.id.select_date_icon);
+        String today = getFormattedDate(0);
+        String tomorrow = getFormattedDate(1);
+        String dayAfterTomorrow = getFormattedDate(2);
+        if (tabLayout.getTabAt(0) != null) {
+            tabLayout.getTabAt(0).setText("Today\n" + today);
+        }
+        if (tabLayout.getTabAt(1) != null) {
+            tabLayout.getTabAt(1).setText("Tomorrow\n" + tomorrow);
+        }
+        if (tabLayout.getTabAt(2) != null) {
+            tabLayout.getTabAt(2).setText("Day After\n" + dayAfterTomorrow);
+        }
+
+        selectDateIcon = findViewById(R.id.select_date_icon);
 //
 //        selectDateIcon.setOnClickListener(view -> showDatePicker());
         // Example: Handling a single slot (Repeat this for other slots)
@@ -184,6 +206,12 @@ public class BookingActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(BookingActivity.this, "Error checking bookings!", Toast.LENGTH_SHORT).show();
                 });
+    }
+    private String getFormattedDate(int daysToAdd) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, daysToAdd); // Add days to current date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
     }
 
 }
