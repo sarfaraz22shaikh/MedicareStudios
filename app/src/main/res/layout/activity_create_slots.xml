@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <!-- Previous Slots Section -->
+
+    <!-- First Previous Slot -->
+
+    <!-- Second Previous Slot -->
+
+    <!-- Create Slots Section -->
+
+    <!-- Morning Dropdown -->
+    <TextView
+        android:id="@+id/create_slots_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="CREATE SLOTS"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/morning_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/time_periods"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/create_slots_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:padding="8dp" />
+
+    <!-- Clinic Time Section -->
+    <TextView
+        android:id="@+id/clinic_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLINIC TIME"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/morning_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Opening Time -->
+    <TextView
+        android:id="@+id/opening_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opening Time"
+        android:textSize="12sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/clinic_time_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/opening_time_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Eg: 9"
+        android:inputType="number"
+        android:background="@android:drawable/edit_text"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/opening_time_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/closing_time_label"
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Closing Time -->
+    <TextView
+        android:id="@+id/closing_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Closing Time"
+        android:textSize="12sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/clinic_time_label"
+        app:layout_constraintStart_toEndOf="@id/opening_time_input"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/closing_time_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Eg: 10"
+        android:inputType="number"
+        android:background="@android:drawable/edit_text"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/closing_time_label"
+        app:layout_constraintStart_toEndOf="@id/opening_time_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp" />
+
+    <!-- Slot Duration Section -->
+    <TextView
+        android:id="@+id/slot_duration_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SLOT DURATION"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/opening_time_input"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Hours -->
+    <TextView
+        android:id="@+id/hours_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hours"
+        android:textSize="12sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/slot_duration_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/hours_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Eg: 1"
+        android:inputType="number"
+        android:background="@android:drawable/edit_text"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/hours_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mins_label"
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Minutes -->
+    <TextView
+        android:id="@+id/mins_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mins"
+        android:textSize="12sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/slot_duration_label"
+        app:layout_constraintStart_toEndOf="@id/hours_input"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/mins_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Eg: 30"
+        android:inputType="number"
+        android:background="@android:drawable/edit_text"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/mins_label"
+        app:layout_constraintStart_toEndOf="@id/hours_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp" />
+
+    <!-- Max Person Per Slot -->
+    <TextView
+        android:id="@+id/max_person_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAX PERSON PER SLOT"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/hours_input"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Spinner
+        android:id="@+id/max_person_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/max_person_options"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/max_person_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:padding="8dp" />
+
+    <!-- Create Slot Button -->
+    <Button
+        android:id="@+id/create_slot_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Slot"
+        android:backgroundTint="#0288D1"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/max_person_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
