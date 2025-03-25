@@ -9,13 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
 public class doctor_info_card extends AppCompatActivity {
     private FirebaseFirestore db;
     private String doctorId; // To store fetched doctor ID
