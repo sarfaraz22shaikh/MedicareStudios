@@ -94,7 +94,7 @@
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="#7B8A88"
-            android:textDirection="firstStrongRtl"
+            android:textDirection="ltr"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
