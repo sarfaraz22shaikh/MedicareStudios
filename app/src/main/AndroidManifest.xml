@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
-
         <activity
             android:name=".Splashactivity"
             android:exported="true">
@@ -24,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateSlots" />
         <activity android:name=".MainActivity" />
         <activity android:name=".doctor_login" />
         <activity android:name=".patient_login" />
@@ -33,9 +33,9 @@
         <activity android:name=".forget_password" />
         <activity android:name=".doctor_registration_2" />
         <activity android:name=".doctor_dashboard" />
-        <activity android:name=".search_doctor"/>
-        <activity android:name=".doctor_info_card"/>
-        <activity android:name=".BookingActivity"/>
+        <activity android:name=".search_doctor" />
+        <activity android:name=".doctor_info_card" />
+        <activity android:name=".BookingActivity" />
     </application>
 
 </manifest>
