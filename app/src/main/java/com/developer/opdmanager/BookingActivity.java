@@ -3,6 +3,7 @@ package com.developer.opdmanager;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -10,16 +11,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -32,7 +39,10 @@ public class BookingActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private TextView selectedDateText;
-
+    private RecyclerView recyclerView;
+    private SlotAdapter slotAdapter;
+    private List<SlotModel> slotList = new ArrayList<>();
+    String doctorId;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +54,17 @@ public class BookingActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
+
+        recyclerView = findViewById(R.id.recyclerViewSlots);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        slotAdapter = new SlotAdapter(slotList);
+        recyclerView.setAdapter(slotAdapter);
+
+        fetchAvailableSlots();
         TextView timeDetail = findViewById(R.id.timeDetail);
         TextView doctorName = findViewById(R.id.DoctorName);
         String name = getIntent().getStringExtra("doctor_name");
-        String doctorId = getIntent().getStringExtra("doctor_id");
+        doctorId = getIntent().getStringExtra("doctor_id");
         doctorName.setText("Dr " + name);
         timeDetail.setText("Dr "+name + " online booking opens at 07:00 AM");
         TabLayout tabLayout = findViewById(R.id.tabLayoutDates);
@@ -69,74 +86,6 @@ public class BookingActivity extends AppCompatActivity {
 //
 //        selectDateIcon.setOnClickListener(view -> showDatePicker());
         // Example: Handling a single slot (Repeat this for other slots)
-        LinearLayout slot2 = findViewById(R.id.slot2); // Replace with your actual ID
-        final TextView status2 = findViewById(R.id.status2); // Replace with your actual ID
-
-        slot2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (status2.getText().toString().equals("Available")) {
-                    // Show a success Toast message
-                    Toast.makeText(BookingActivity.this, "You booked the slot 10:30 AM - 11:00 AM successfully!", Toast.LENGTH_SHORT).show();
-
-                    // Change the text to "Booked"
-                    status2.setText("Booked");
-
-                    bookAppointment(doctorId, name, "10:00 AM - 10:30 PM", status2);
-                } else {
-                    // Show an error if the slot is already booked
-                    Toast.makeText(BookingActivity.this, "This slot is already booked!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        // slot 3
-
-        LinearLayout slot3 = findViewById(R.id.slot3); // Replace with your actual ID
-        final TextView slot3status = findViewById(R.id.slot3status); // Replace with your actual ID
-
-        slot3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (slot3status.getText().toString().equals("Available")) {
-                    // Show a success Toast message
-                    Toast.makeText(BookingActivity.this, "You booked the slot 11:00 AM - 12:30 AM successfully!", Toast.LENGTH_SHORT).show();
-
-                    // Change the text to "Booked"
-                    slot3status.setText("Booked");
-//                    checkIfSlotBooked("11:00 AM - 12:30 PM", slot3status, slot3);
-                    bookAppointment(doctorId, name, "11:00 AM - 12:30 PM", slot3status);
-                } else {
-                    // Show an error if the slot is already booked
-                    slot3status.setText("Booked");
-                    Toast.makeText(BookingActivity.this, "This slot is already booked!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-//   slot4
-        LinearLayout slot4 = findViewById(R.id.slot4); // Replace with your actual ID
-        final TextView slot4status = findViewById(R.id.slot4status); // Replace with your actual ID
-
-        slot4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (slot4status.getText().toString().equals("Available")) {
-                    // Show a success Toast message
-                    Toast.makeText(BookingActivity.this, "You booked the slot 11:00 AM - 12:30 AM successfully!", Toast.LENGTH_SHORT).show();
-
-                    // Change the text to "Booked"
-                    slot4status.setText("Booked");
-
-                    bookAppointment(doctorId, name, "02:00 AM - 02:30 PM", slot4status);
-                } else {
-                    // Show an error if the slot is already booked
-                    Toast.makeText(BookingActivity.this, "This slot is already booked!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
     }
 
 
@@ -212,6 +161,22 @@ public class BookingActivity extends AppCompatActivity {
         calendar.add(Calendar.DAY_OF_YEAR, daysToAdd); // Add days to current date
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
         return dateFormat.format(calendar.getTime());
+    }
+    private void fetchAvailableSlots() {
+        doctorId = getIntent().getStringExtra("doctor_id");
+        db.collection("doctors").document(doctorId).collection("slots")
+                .whereLessThan("currentBookings", 5) // Fetch only available slots
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    slotList.clear();
+                    for (DocumentSnapshot doc : queryDocumentSnapshots.getDocuments()) {
+                        SlotModel slot = doc.toObject(SlotModel.class);
+                        slot.setSlotId(doc.getId()); // Store slot ID
+                        slotList.add(slot);
+                    }
+                    slotAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> Log.e("Firestore", "Error fetching slots", e));
     }
 
 }

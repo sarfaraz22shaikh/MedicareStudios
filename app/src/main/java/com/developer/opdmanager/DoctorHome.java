@@ -10,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +56,9 @@ public class DoctorHome extends Fragment {
     }
 
     private Button CreateSlot;
+    public TextView doctorName;
+    private String userId;
+    private TextView specialization;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +74,62 @@ public class DoctorHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_doctor_home, container, false);
         CreateSlot = view.findViewById(R.id.create_slot_button);
+        doctorName = view.findViewById(R.id.doctor_name);
+        specialization = view.findViewById(R.id.specialization);
+
+        fetchDoctorData();
+
         CreateSlot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("pogo","pankaj");
                 Intent intent = new Intent(getActivity(), CreateSlots.class);
+                intent.putExtra("doctorId", userId);
                 startActivity(intent);
             }
         });
 
         return view;
+    }
+    private void fetchDoctorData() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if (currentUser != null) {
+            userId = currentUser.getUid();
+            Log.d("FirestoreFetch", "Fetching data for User ID: " + userId);
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("doctors").document(userId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String name = documentSnapshot.getString("name");
+                            String speciality = documentSnapshot.getString("specialization");
+
+                            if (name != null) {
+                                String[] nameParts = name.split(" ", 2);
+                                specialization.setText(speciality != null ? speciality : "No specialization found");
+
+                                if (nameParts.length > 1) {
+                                    doctorName.setText("Dr. " + nameParts[0] + "\n" + nameParts[1]);
+                                } else {
+                                    doctorName.setText("Dr. " + nameParts[0]);
+                                }
+                            } else {
+                                doctorName.setText("No name found");
+                                specialization.setText("No specialization found");
+                            }
+                        } else {
+                            doctorName.setText("No data available");
+                            specialization.setText("No data available");
+                            Log.e("FirestoreData", "No document found for userId: " + userId);
+                        }
+                    })
+                    .addOnFailureListener(e -> Log.e("FirestoreError", "Error fetching data", e));
+        } else {
+            Log.e("FirestoreFetch", "No user is logged in");
+        }
+        // passing id to next intent
+
     }
 }
