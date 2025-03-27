@@ -6,8 +6,11 @@ public class SlotModel {
     private String endTime;
     private int maxBookings;
     private int currentBookings;
+    private boolean isBookButtonVisible; // New field for button visibility
 
-    public SlotModel() { } // Empty constructor for Firestore
+    public SlotModel() {
+        this.isBookButtonVisible = false; // Default visibility state
+    } // Empty constructor for Firestore
 
     public SlotModel(String slotId, String startTime, String endTime, int maxBookings, int currentBookings) {
         this.slotId = slotId;
@@ -15,6 +18,7 @@ public class SlotModel {
         this.endTime = endTime;
         this.maxBookings = maxBookings;
         this.currentBookings = currentBookings;
+        this.isBookButtonVisible = false; // Initially hidden
     }
 
     // Getters and Setters
@@ -32,4 +36,7 @@ public class SlotModel {
 
     public int getCurrentBookings() { return currentBookings; }
     public void setCurrentBookings(int currentBookings) { this.currentBookings = currentBookings; }
+
+    public boolean isBookButtonVisible() { return isBookButtonVisible; }
+    public void setBookButtonVisible(boolean bookButtonVisible) { this.isBookButtonVisible = bookButtonVisible; }
 }

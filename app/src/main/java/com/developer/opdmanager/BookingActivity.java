@@ -43,28 +43,31 @@ public class BookingActivity extends AppCompatActivity {
     private SlotAdapter slotAdapter;
     private List<SlotModel> slotList = new ArrayList<>();
     String doctorId;
+    String PatientId;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule);
-
+        doctorId = getIntent().getStringExtra("doctor_id");
         // Initialize Firebase
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        assert currentUser != null;
+        PatientId = currentUser.getUid();
+        Log.d("Firestore", "onCreate: " + PatientId + " 1  " + doctorId);
 
 
         recyclerView = findViewById(R.id.recyclerViewSlots);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        slotAdapter = new SlotAdapter(slotList);
+        slotAdapter = new SlotAdapter(slotList ,doctorId , PatientId );
         recyclerView.setAdapter(slotAdapter);
 
         fetchAvailableSlots();
         TextView timeDetail = findViewById(R.id.timeDetail);
         TextView doctorName = findViewById(R.id.DoctorName);
         String name = getIntent().getStringExtra("doctor_name");
-        doctorId = getIntent().getStringExtra("doctor_id");
         doctorName.setText("Dr " + name);
         timeDetail.setText("Dr "+name + " online booking opens at 07:00 AM");
         TabLayout tabLayout = findViewById(R.id.tabLayoutDates);

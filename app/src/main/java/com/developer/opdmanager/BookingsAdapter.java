@@ -34,6 +34,8 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHo
         holder.status.setText("Status: " + appointment.getStatus());
     }
 
+
+
     @Override
     public int getItemCount() {
         return appointmentList.size();
