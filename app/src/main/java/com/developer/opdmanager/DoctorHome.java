@@ -42,8 +42,8 @@ public class DoctorHome extends Fragment {
         appointmentList = new ArrayList<>();
 
         // Dummy data (ensure this data is not empty)
-        appointmentList.add(new Bookingrequest("Julie Rick", "", "10 AM - 11 AM", "https://example.com/patient1.jpg"));
-        appointmentList.add(new Bookingrequest("John Doe", "", "11 AM - 12 PM", "https://example.com/patient2.jpg"));
+        appointmentList.add(new Bookingrequest("Julie Rick","10 AM - 11 AM"));
+        appointmentList.add(new Bookingrequest("John Doe","11 AM - 12 PM"));
 
         adapter = new BookingRequestAdapter(getContext(), appointmentList, new BookingRequestAdapter.OnAppointmentActionListener() {
             @Override
@@ -56,12 +56,9 @@ public class DoctorHome extends Fragment {
                 Toast.makeText(getActivity(), "Skipped: " + booking.getPatientName(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
         recyclerView.setAdapter(adapter);
 
         CreateSlot.setOnClickListener(v -> {
-            Log.d("pogo", "pankaj");
             Intent intent = new Intent(getActivity(), CreateSlots.class);
             intent.putExtra("doctorId", userId);
             startActivity(intent);

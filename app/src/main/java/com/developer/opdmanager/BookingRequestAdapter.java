@@ -43,7 +43,6 @@ public class BookingRequestAdapter extends RecyclerView.Adapter<BookingRequestAd
 
         // Set text values with null safety checks
         holder.tvPatientName.setText(appointment.getPatientName() != null ? appointment.getPatientName() : "Unknown");
-        holder.tvSymptoms.setText("Symptoms: " + (appointment.getSymptoms() != null ? appointment.getSymptoms() : "Not Specified"));
         holder.tvTimeSlot.setText(appointment.getTimeSlot() != null ? appointment.getTimeSlot() : "Time Not Available");
 
 
@@ -52,7 +51,6 @@ public class BookingRequestAdapter extends RecyclerView.Adapter<BookingRequestAd
         holder.btnAccept.setOnClickListener(v -> listener.onAccept(appointment));
         holder.btnSkip.setOnClickListener(v -> listener.onSkip(appointment));
     }
-
     @Override
     public int getItemCount() {
         return appointmentList.size();
