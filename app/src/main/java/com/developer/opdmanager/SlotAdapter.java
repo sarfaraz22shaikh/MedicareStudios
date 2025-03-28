@@ -53,7 +53,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
         // Check if the slot is available based on currentBooking vs maxBooking
         boolean isSlotAvailable = slot.getCurrentBookings() < slot.getMaxBookings();
         
-        // Check if the current user has booked this slot
+        // Check if the current user has booked this slot and get its status
         FirebaseFirestore.getInstance()
             .collection("doctors")
             .document(doctorId)
@@ -63,13 +63,36 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
             .whereEqualTo("patientId", currentUser)
             .get()
             .addOnSuccessListener(queryDocumentSnapshots -> {
-                boolean isUserBooked = !queryDocumentSnapshots.isEmpty();
-                
-                if (isUserBooked) {
-                    // If the user has booked this slot earlier, show "Pending"
-                    holder.status.setText("Pending");
-                    holder.status.setTextColor(Color.parseColor("#FFA500")); // Orange for Pending
-                    holder.bookButton.setVisibility(View.GONE); // Hide button if already booked
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // User has booked this slot, get the status
+                    DocumentSnapshot bookingDoc = queryDocumentSnapshots.getDocuments().get(0);
+                    String bookingStatus = bookingDoc.getString("status");
+                    
+                    if (bookingStatus != null) {
+                        switch (bookingStatus.toLowerCase()) {
+                            case "approved":
+                                holder.status.setText("Approved");
+                                holder.status.setTextColor(Color.parseColor("#4CAF50")); // Green for Approved
+                                holder.bookButton.setVisibility(View.GONE);
+                                break;
+                            case "rejected":
+                                holder.status.setText("Rejected");
+                                holder.status.setTextColor(Color.parseColor("#FF5555")); // Red for Rejected
+                                holder.bookButton.setVisibility(View.GONE);
+                                break;
+                            case "pending":
+                            default:
+                                holder.status.setText("Pending");
+                                holder.status.setTextColor(Color.parseColor("#FFA500")); // Orange for Pending
+                                holder.bookButton.setVisibility(View.GONE);
+                                break;
+                        }
+                    } else {
+                        // If status is null, default to Pending
+                        holder.status.setText("Pending");
+                        holder.status.setTextColor(Color.parseColor("#FFA500"));
+                        holder.bookButton.setVisibility(View.GONE);
+                    }
                 } else if (isSlotAvailable) {
                     // If the slot is available and not booked by the user, show "Available"
                     holder.status.setText("Available");
