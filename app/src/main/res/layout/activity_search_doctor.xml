@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#F4F3F3"
     android:padding="16dp"
-    tools:context=".appointment_section">
+    tools:context=".Fragments.appointment_section">
 
     <ImageView
         android:id="@+id/imageView6"

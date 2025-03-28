@@ -15,7 +15,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Splashactivity"
+            android:name=".Activities.Splashactivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,19 +23,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateSlots" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".doctor_login" />
-        <activity android:name=".patient_login" />
-        <activity android:name=".doctor_registration" />
-        <activity android:name=".patient_registration" />
-        <activity android:name=".dashboard" />
-        <activity android:name=".forget_password" />
-        <activity android:name=".doctor_registration_2" />
-        <activity android:name=".doctor_dashboard" />
-        <activity android:name=".search_doctor" />
-        <activity android:name=".doctor_info_card" />
-        <activity android:name=".BookingActivity" />
+        <activity android:name=".Utils.CreateSlots" />
+        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.doctor_login" />
+        <activity android:name=".Activities.patient_login" />
+        <activity android:name=".Activities.doctor_registration" />
+        <activity android:name=".Activities.patient_registration" />
+        <activity android:name=".Activities.dashboard" />
+        <activity android:name=".Activities.forget_password" />
+        <activity android:name=".Activities.doctor_registration_2" />
+        <activity android:name=".Activities.doctor_dashboard" />
+        <activity android:name=".Activities.search_doctor" />
+        <activity android:name=".Activities.doctor_info_card" />
+        <activity android:name=".Activities.BookingActivity" />
     </application>
 
 </manifest>

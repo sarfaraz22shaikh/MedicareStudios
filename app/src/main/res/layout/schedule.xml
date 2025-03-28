@@ -1,36 +1,43 @@
-<ScrollView
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- Doctor Profile Section -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="8dp">
+            android:padding="@dimen/padding_large">
 
+            <!-- Doctor Profile Section -->
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView10"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="@dimen/profile_image_size"
+                android:layout_height="@dimen/profile_image_size"
                 app:shapeAppearanceOverlay="@style/CircleImageViewStyle"
-                app:srcCompat="@drawable/oq6utw0" />
+                app:srcCompat="@drawable/oq6utw0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="Doctor profile image"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/doctorInfoLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingStart="16dp">
+                android:layout_marginStart="@dimen/margin_large"
+                app:layout_constraintStart_toEndOf="@id/imageView10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imageView10"
+                app:layout_constraintBottom_toBottomOf="@id/imageView10">
 
                 <TextView
                     android:id="@+id/DoctorName"
@@ -38,76 +45,88 @@
                     android:layout_height="wrap_content"
                     android:text="Dr Prasad Chinchole"
                     android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#000000" />
+                    android:textSize="@dimen/text_size_xlarge"
+                    android:textColor="#000000"
+                    tools:text="Dr Prasad Chinchole"/>
 
                 <TextView
+                    android:id="@+id/doctorSpecialization"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dermatologist, MD, MBBS"
-                    android:textSize="14sp"
-                    android:textColor="#555555" />
+                    android:textSize="@dimen/text_size_medium"
+                    android:textColor="#555555"
+                    tools:text="Dermatologist, MD, MBBS"/>
 
                 <TextView
+                    android:id="@+id/doctorLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Methaji Mala (Shri Datta Skin  Cosmetic Clinic)"
-                    android:textSize="12sp"
-                    android:textColor="#777777" />
+                    android:text="Methaji Mala (Shri Datta Skin Cosmetic Clinic)"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="#777777"
+                    tools:text="Methaji Mala (Shri Datta Skin Cosmetic Clinic)"/>
             </LinearLayout>
-        </LinearLayout>
 
-        <!-- Booking Info Section -->
-        <TextView
-            android:id="@+id/timeDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dr Chinchole's online booking opens at 07:00 AM"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:padding="8dp"
-            android:textColor="#666666"
-            android:background="#E0F7FA" />
-
-        <!-- Date Selection Tabs -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutDates"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:layout_marginTop="7dp"
-            app:tabMode="scrollable"
-            app:tabIndicatorColor="#000000"
-            app:tabSelectedTextColor="#000000"
-            app:tabTextColor="#888888">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
+            <!-- Booking Info Section -->
+            <TextView
+                android:id="@+id/timeDetail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Today\n25 Mar" />
+                android:text="Dr Chinchole's online booking is opened"
+                android:textSize="@dimen/text_size_medium"
+                android:gravity="center"
+                android:padding="@dimen/padding_medium"
+                android:textColor="#666666"
+                android:background="#E0F7FA"
+                android:layout_marginTop="@dimen/margin_large"
+                app:layout_constraintTop_toBottomOf="@id/imageView10"
+                tools:text="Dr Chinchole's online booking opens at 07:00 AM"/>
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
+            <!-- Date Selection Tabs -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayoutDates"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tomorrow\n26 Mar" />
+                android:background="#FFFFFF"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:tabMode="scrollable"
+                app:tabIndicatorColor="#000000"
+                app:tabSelectedTextColor="#000000"
+                app:tabTextColor="#888888"
+                app:layout_constraintTop_toBottomOf="@id/timeDetail">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mon\n27 Mar" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today\n25 Mar" />
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/select_date_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout="@drawable/date_selection"
-                />
-        </com.google.android.material.tabs.TabLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSlots"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tomorrow\n26 Mar" />
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
-</ScrollView>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mon\n27 Mar" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/select_date_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout="@drawable/date_selection" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <!-- Slots RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSlots"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/tabLayoutDates"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
