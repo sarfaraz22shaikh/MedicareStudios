@@ -1,19 +1,28 @@
 package com.developer.opdmanager;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DoctorAppointment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DoctorAppointment extends Fragment {
+public class DoctorAppointment extends Fragment implements BookingFetcher.BookingFetchListener {
+    private static final String TAG = "DoctorAppointment"; // Updated TAG to reflect the Fragment name
+    private RecyclerView recyclerView;
+    private ApprovedBookingAdapter adapter;
+    private BookingFetcher bookingFetcher; // Use BookingFetcher instead of ApprovedBookingFetcher
+    private String doctorId;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +45,6 @@ public class DoctorAppointment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment DoctorAppointment.
      */
-    // TODO: Rename and change types and number of parameters
     public static DoctorAppointment newInstance(String param1, String param2) {
         DoctorAppointment fragment = new DoctorAppointment();
         Bundle args = new Bundle();
@@ -59,6 +67,43 @@ public class DoctorAppointment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor_appointment, container, false);
+        View view = inflater.inflate(R.layout.fragment_doctor_appointment, container, false);
+
+        // Initialize RecyclerView
+        recyclerView = view.findViewById(R.id.appointmentsRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new ApprovedBookingAdapter();
+        recyclerView.setAdapter(adapter);
+
+        // Fetch doctorId from FirebaseAuth
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            doctorId = currentUser.getUid();
+            Log.d(TAG, "Doctor ID: " + doctorId);
+
+            // Fetch approved bookings using BookingFetcher
+            bookingFetcher = new BookingFetcher(doctorId, this);
+            Log.d(TAG, "Starting to fetch approved bookings for doctor: " + doctorId);
+            bookingFetcher.fetchApprovedBookings();
+        } else {
+            Log.e(TAG, "No user is logged in");
+        }
+
+        return view;
+    }
+
+    @Override
+    public void onBookingsFetched(List<Bookingrequest> bookings) {
+        if (bookings == null || bookings.isEmpty()) {
+            Log.w(TAG, "No approved bookings found for the doctor.");
+        } else {
+            Log.d(TAG, "Received " + bookings.size() + " approved bookings:");
+            for (Bookingrequest booking : bookings) {
+                Log.d(TAG, "Booking: patientId=" + booking.getPatientId() + ", status=" + booking.getStatus());
+            }
+        }
+        // Update RecyclerView
+        adapter.setApprovedBookings(bookings);
     }
 }

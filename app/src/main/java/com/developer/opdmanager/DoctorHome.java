@@ -11,60 +11,51 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorHome extends Fragment {
+public class DoctorHome extends Fragment implements BookingFetcher.BookingFetchListener {
 
     private Button CreateSlot;
-    public TextView doctorName;
+    private TextView doctorName;
     private String userId;
     private TextView specialization;
+    private BookingAdapter adapter;
     private RecyclerView recyclerView;
-    private BookingRequestAdapter adapter;
-    private List<Bookingrequest> appointmentList;
+    private static final String TAG = "DoctorHome";
+    private BookingFetcher bookingFetcher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_home, container, false);
 
+        // Initialize UI components
         CreateSlot = view.findViewById(R.id.create_slot_button);
         doctorName = view.findViewById(R.id.doctor_name);
         specialization = view.findViewById(R.id.specialization);
         recyclerView = view.findViewById(R.id.recyclerViewAppointments);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        appointmentList = new ArrayList<>();
-
-        // Dummy data (ensure this data is not empty)
-        appointmentList.add(new Bookingrequest("Julie Rick","10 AM - 11 AM"));
-        appointmentList.add(new Bookingrequest("John Doe","11 AM - 12 PM"));
-
-        adapter = new BookingRequestAdapter(getContext(), appointmentList, new BookingRequestAdapter.OnAppointmentActionListener() {
-            @Override
-            public void onAccept(Bookingrequest booking) {
-                Toast.makeText(getActivity(), "Accepted: " + booking.getPatientName(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onSkip(Bookingrequest booking) {
-                Toast.makeText(getActivity(), "Skipped: " + booking.getPatientName(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Set up RecyclerView adapter
+        adapter = new BookingAdapter();
         recyclerView.setAdapter(adapter);
 
-        CreateSlot.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), CreateSlots.class);
-            intent.putExtra("doctorId", userId);
-            startActivity(intent);
-        });
+        // Fetch doctor data (this will set userId)
+        fetchDoctorData();
 
-        fetchDoctorData(); // Fetch doctor data only after UI setup
+        // Set up Create Slot button
+        CreateSlot.setOnClickListener(v -> {
+            if (userId != null) {
+                Intent intent = new Intent(getActivity(), CreateSlots.class);
+                intent.putExtra("doctorId", userId);
+                startActivity(intent);
+            } else {
+                Log.e(TAG, "User ID is null, cannot start CreateSlots activity");
+            }
+        });
 
         return view;
     }
@@ -75,7 +66,12 @@ public class DoctorHome extends Fragment {
 
         if (currentUser != null) {
             userId = currentUser.getUid();
-            Log.d("FirestoreFetch", "Fetching data for User ID: " + userId);
+            Log.d(TAG, "Fetching data for User ID: " + userId);
+
+            // Initialize BookingFetcher after getting userId
+            bookingFetcher = new BookingFetcher(userId, this);
+            Log.d(TAG, "Starting to fetch pending bookings for doctor: " + userId);
+            bookingFetcher.fetchPendingBookings();
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("doctors").document(userId).get()
@@ -101,12 +97,26 @@ public class DoctorHome extends Fragment {
                         } else {
                             doctorName.setText("No data available");
                             specialization.setText("No data available");
-                            Log.e("FirestoreData", "No document found for userId: " + userId);
+                            Log.e(TAG, "No document found for userId: " + userId);
                         }
                     })
-                    .addOnFailureListener(e -> Log.e("FirestoreError", "Error fetching data", e));
+                    .addOnFailureListener(e -> Log.e(TAG, "Error fetching data", e));
         } else {
-            Log.e("FirestoreFetch", "No user is logged in");
+            Log.e(TAG, "No user is logged in");
         }
+    }
+
+    @Override
+    public void onBookingsFetched(List<Bookingrequest> bookings) {
+        if (bookings == null || bookings.isEmpty()) {
+            Log.w(TAG, "No pending bookings found for the doctor.");
+        } else {
+            Log.d(TAG, "Received " + bookings.size() + " pending bookings:");
+            for (Bookingrequest booking : bookings) {
+
+            }
+        }
+        // Update RecyclerView
+        adapter.setBookings(bookings);
     }
 }
