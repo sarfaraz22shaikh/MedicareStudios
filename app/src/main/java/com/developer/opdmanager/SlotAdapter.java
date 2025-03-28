@@ -49,43 +49,50 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
     @Override
     public void onBindViewHolder(@NonNull SlotViewHolder holder, int position) {
         SlotModel slot = slotList.get(position);
+        
         // Check if the slot is available based on currentBooking vs maxBooking
         boolean isSlotAvailable = slot.getCurrentBookings() < slot.getMaxBookings();
-        // Check if the current user has booked this slot (assuming you have this info)
-        boolean isUserBooked = slot.isUserBooked();// Replace with your actual logic (e.g., database check)
-
-
-        if (isUserBooked) {
-            // If the user has booked this slot earlier, show "Pending"
-            holder.status.setText("Pending");
-            holder.status.setTextColor(Color.parseColor("#FFA500")); // Orange for Pending
-            holder.bookButton.setVisibility(View.GONE); // Hide button if already booked
-        } else if (isSlotAvailable) {
-            // If the slot is available and not booked by the user, show "Available"
-            holder.status.setText("Available");
-            holder.status.setTextColor(Color.parseColor("#4CAF50")); // Green for Available
-            holder.bookButton.setVisibility(View.VISIBLE); // Show button
-        } else {
-            // If the slot is full (not available), hide button and show "Booked"
-            holder.status.setText("Booked");
-            holder.status.setTextColor(Color.parseColor("#FF5555")); // Red for Booked
-            holder.bookButton.setVisibility(View.GONE);
-        }
-
-
-
-
-
-
-
-
-
-
-
+        
+        // Check if the current user has booked this slot
+        FirebaseFirestore.getInstance()
+            .collection("doctors")
+            .document(doctorId)
+            .collection("slots")
+            .document(slot.getSlotId())
+            .collection("bookings")
+            .whereEqualTo("patientId", currentUser)
+            .get()
+            .addOnSuccessListener(queryDocumentSnapshots -> {
+                boolean isUserBooked = !queryDocumentSnapshots.isEmpty();
+                
+                if (isUserBooked) {
+                    // If the user has booked this slot earlier, show "Pending"
+                    holder.status.setText("Pending");
+                    holder.status.setTextColor(Color.parseColor("#FFA500")); // Orange for Pending
+                    holder.bookButton.setVisibility(View.GONE); // Hide button if already booked
+                } else if (isSlotAvailable) {
+                    // If the slot is available and not booked by the user, show "Available"
+                    holder.status.setText("Available");
+                    holder.status.setTextColor(Color.parseColor("#4CAF50")); // Green for Available
+                    holder.bookButton.setVisibility(View.VISIBLE); // Show button
+                } else {
+                    // If the slot is full (not available), hide button and show "Booked"
+                    holder.status.setText("Booked");
+                    holder.status.setTextColor(Color.parseColor("#FF5555")); // Red for Booked
+                    holder.bookButton.setVisibility(View.GONE);
+                }
+            })
+            .addOnFailureListener(e -> {
+                Log.e("Firestore", "Error checking booking status", e);
+                // Default to available if there's an error
+                holder.status.setText("Available");
+                holder.status.setTextColor(Color.parseColor("#4CAF50"));
+                holder.bookButton.setVisibility(View.VISIBLE);
+            });
 
         holder.startTime.setText(slot.getStartTime());
         holder.endTime.setText(slot.getEndTime());
-        Log.d( "SlotID", "onBindViewHolder: " + slot.getSlotId() );
+        Log.d("SlotID", "onBindViewHolder: " + slot.getSlotId());
 
         // Set button visibility based on model state
         holder.bookButton.setVisibility(slot.isBookButtonVisible() ? View.VISIBLE : View.GONE);
@@ -99,20 +106,20 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
             notifyItemChanged(position);
         });
 
-
         // Handle Book button click
-  holder.bookButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-          Toast.makeText( holder.itemView.getContext() , "Book button clicked", Toast.LENGTH_SHORT).show();
-          Log.d( "SlotID", "onBindViewHolder: " + slot.getSlotId() );
+        holder.bookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(holder.itemView.getContext(), "Book button clicked", Toast.LENGTH_SHORT).show();
+                Log.d("SlotID", "onBindViewHolder: " + slot.getSlotId());
 
-          bookSlot(doctorId ,  slot.getSlotId() ,currentUser );
-          holder.arrowButton.setVisibility(View.GONE);
-          holder.bookButton.setVisibility(View.GONE);
-          holder.status.setText("pending");
-      }
-  });
+                bookSlot(doctorId, slot.getSlotId(), currentUser);
+                holder.arrowButton.setVisibility(View.GONE);
+                holder.bookButton.setVisibility(View.GONE);
+                holder.status.setText("Pending");
+                holder.status.setTextColor(Color.parseColor("#FFA500"));
+            }
+        });
     }
 
     @Override

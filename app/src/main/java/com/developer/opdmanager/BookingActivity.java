@@ -168,7 +168,6 @@ public class BookingActivity extends AppCompatActivity {
     private void fetchAvailableSlots() {
         doctorId = getIntent().getStringExtra("doctor_id");
         db.collection("doctors").document(doctorId).collection("slots")
-                .whereLessThan("currentBookings", 5) // Fetch only available slots
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     slotList.clear();
