@@ -4,10 +4,15 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TabStopSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.developer.opdmanager.Adapters.ApprovedBookingAdapter;
 import com.developer.opdmanager.Models.Bookingrequest;
@@ -73,6 +78,11 @@ public class DoctorAppointment extends Fragment implements BookingFetcher.Bookin
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_doctor_appointment, container, false);
+        SpannableString spannableString = new SpannableString("Today's\tAppointments");
+        TabStopSpan tabStop = new TabStopSpan.Standard(450); // Adjust the value based on your screen width
+        spannableString.setSpan(tabStop, 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        TextView textView = view.findViewById(R.id.formaltext);
+        textView.setText(spannableString);
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.appointmentsRecyclerView);

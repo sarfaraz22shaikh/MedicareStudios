@@ -18,11 +18,6 @@ public class appointment_section extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appointment_section); // Layout for your activity
 
-        // Load a fragment into the activity (Example)
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.framelayout1, new AppointmentSectionFragment()) // Your fragment
-                    .commit();
-        }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.developer.opdmanager.Activities;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 
@@ -33,9 +34,11 @@ public class dashboard extends AppCompatActivity {
                 switch (tab.getPosition()) {
                     case 0:
                         fragment = new Home_section();
+                        Log.d("pogo","Home_section");
                         break;
                     case 1:
                         fragment = new AppointmentSectionFragment();
+                        Log.d("pogo","AppointmentSectionFragment");
                         break;
                     case 2:
                         fragment = new profile_section();

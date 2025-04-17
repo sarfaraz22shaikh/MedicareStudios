@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    android:layout_margin="8dp"
+    android:elevation="4dp">
+
+    <!-- Doctor Avatar -->
+    <ImageView
+        android:id="@+id/doctor_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/oq6utw0"
+        android:contentDescription="Doctor Avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        android:clipToOutline="true"
+        android:background="@drawable/circle_background" />
+
+    <!-- Doctor Name -->
+    <TextView
+        android:id="@+id/doctor_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Dr. John Smith"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#1F2A44"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/doctor_avatar"
+        app:layout_constraintTop_toTopOf="@id/doctor_avatar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Rating -->
+    <RatingBar
+        android:id="@+id/doctor_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="4.5"
+        android:isIndicator="true"
+        android:stepSize="0.1"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/doctor_name"
+        app:layout_constraintTop_toBottomOf="@id/doctor_name" />
+
+    <!-- Rating Value -->
+
+    <!-- Appointment Date -->
+
+    <TextView
+        android:id="@+id/rating_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(4.5)"
+        android:textColor="#6B7280"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/doctor_rating"
+        app:layout_constraintTop_toTopOf="@+id/doctor_rating" />
+
+    <TextView
+        android:id="@+id/appointment_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Appointment Date: April 15, 2025"
+        android:textSize="14sp"
+        android:textColor="#6B7280"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@id/doctor_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doctor_rating" />
+
+    <!-- Specialty -->
+    <TextView
+        android:id="@+id/specialty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Specialty: Cardiology"
+        android:textSize="14sp"
+        android:textColor="#6B7280"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/appointment_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appointment_date" />
+
+    <!-- Buttons Container -->
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/doctor_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/specialty">
+
+        <!-- Give Review Button -->
+        <Button
+            android:id="@+id/give_review_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Give Review"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#4B5563"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Pay Button -->
+        <Button
+            android:id="@+id/pay_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pay"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#10B981"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
