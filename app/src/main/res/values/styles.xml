@@ -53,4 +53,6 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="SmallRatingBar" parent="Widget.AppCompat.RatingBar.Small" />
 </resources>
