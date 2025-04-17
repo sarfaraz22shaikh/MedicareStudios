@@ -72,7 +72,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
                     .show();
         });
     }
-
     private void updateBookingStatus(Bookingrequest booking, String newStatus, int position, BookingViewHolder holder) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String doctorId = booking.getDoctorId();
@@ -105,6 +104,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
                             "Error updating booking: " + e.getMessage(),
                             Toast.LENGTH_SHORT).show();
                 });
+
     }
 
     @Override
