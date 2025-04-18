@@ -4,9 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -27,7 +25,7 @@
             android:backgroundTint="@null"
             android:drawableStart="@drawable/baseline_person_2_24"
             android:drawablePadding="5dp"
-            android:hint="Full Name"
+            android:hint="@string/fullname_hint"
             android:paddingStart="15dp"
             android:textAlignment="textStart"
             android:textColor="#7B8A88"
@@ -47,7 +45,7 @@
             android:backgroundTint="@null"
             android:drawableStart="@drawable/baseline_alternate_email_24"
             android:drawablePadding="5dp"
-            android:hint="Email"
+            android:hint="@string/email_hint"
             android:paddingStart="15dp"
             android:textAlignment="textStart"
             android:textColor="#7B8A88"
@@ -59,7 +57,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.183" />
 
-
         <EditText
             android:id="@+id/phonenumber"
             android:layout_width="300dp"
@@ -68,7 +65,7 @@
             android:backgroundTint="@null"
             android:drawableStart="@drawable/baseline_call_end_24"
             android:drawablePadding="5dp"
-            android:hint="Mobile No"
+            android:hint="@string/mobile_hint"
             android:paddingStart="15dp"
             android:textAlignment="textStart"
             android:textAllCaps="false"
@@ -80,7 +77,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.306" />
 
-
         <EditText
             android:id="@+id/passwordInput"
             android:layout_width="300dp"
@@ -89,7 +85,7 @@
             android:backgroundTint="@null"
             android:drawableStart="@drawable/baseline_lock_24"
             android:drawablePadding="5dp"
-            android:hint="Set Password"
+            android:hint="@string/password_hint"
             android:paddingStart="15dp"
             android:textAlignment="textStart"
             android:textAllCaps="false"
@@ -109,7 +105,7 @@
             android:layout_height="49dp"
             android:background="@drawable/button_border"
             android:backgroundTint="#FF3CE7CA"
-            android:text="next"
+            android:text="@string/next_button"
             android:textAlignment="gravity"
             android:textAllCaps="false"
             android:textColor="#ffffff"
@@ -138,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="Male"
+                android:text="@string/male"
                 android:layout_marginEnd="16dp"/>
 
             <RadioButton
@@ -146,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="Female"
+                android:text="@string/female"
                 android:layout_marginEnd="16dp"/>
 
             <RadioButton
@@ -154,13 +150,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="Other"/>
+                android:text="@string/other"/>
 
         </RadioGroup>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <TextView
         android:id="@+id/textView2"
@@ -169,14 +162,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="15dp"
         android:padding="20dp"
-        android:text="DOCTOR REGISTRATION"
+        android:text="@string/doctor_registration"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

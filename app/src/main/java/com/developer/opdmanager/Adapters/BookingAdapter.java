@@ -1,6 +1,9 @@
 package com.developer.opdmanager.Adapters;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import com.developer.opdmanager.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
     private List<Bookingrequest> bookings = new ArrayList<>();
@@ -35,8 +39,15 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
     @Override
     public void onBindViewHolder(@NonNull BookingViewHolder holder, int position) {
-        Bookingrequest booking = bookings.get(position);
 
+        Bookingrequest booking = bookings.get(position);
+        Context localizedContext = getLocalizedContext(holder.itemView.getContext());
+        SharedPreferences prefs = localizedContext.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("My_Lang", "hi"); // or "en"
+        editor.apply();
+        holder.btnAccept.setText(localizedContext.getString(R.string.accept));
+        holder.btnSkip.setText(localizedContext.getString(R.string.decline));
         // Set time slot
         String timeSlot = booking.getStartTime() + " - " + booking.getEndTime();
         holder.tvTimeSlot.setText(timeSlot);
@@ -126,5 +137,17 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             btnAccept = itemView.findViewById(R.id.btn_accept);
             btnSkip = itemView.findViewById(R.id.btn_skip);
         }
+    }
+    private Context getLocalizedContext(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang", "en");
+
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+
+        return context.createConfigurationContext(config);
     }
 }

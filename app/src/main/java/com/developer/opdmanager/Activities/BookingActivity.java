@@ -1,6 +1,7 @@
 package com.developer.opdmanager.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developer.opdmanager.R;
 import com.developer.opdmanager.Adapters.SlotAdapter;
 import com.developer.opdmanager.Models.SlotModel;
+import com.developer.opdmanager.Utils.LocaleHelper;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +47,12 @@ public class BookingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "default");
+
+        if (!lang.equals("default")) {
+            LocaleHelper.setLocale(this, lang);
+        }
         setContentView(R.layout.schedule);
         doctorId = getIntent().getStringExtra("doctor_id");
         // Initialize Firebase

@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="46dp"
@@ -24,7 +25,6 @@
         android:layout_height="299dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-
         android:layout_marginStart="236dp"
         android:layout_marginBottom="516dp"
         android:src="@drawable/half_circle"
@@ -47,7 +47,7 @@
         android:id="@+id/textView"
         android:layout_width="100dp"
         android:layout_height="44dp"
-        android:text="DOCTOR"
+        android:text="@string/doctor"
         android:textColor="#3CE7CA"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -65,14 +65,13 @@
         android:background="@drawable/button_border"
         android:backgroundTint="@null"
         android:paddingLeft="15dp"
-        android:hint="Username"
+        android:hint="@string/username_hint"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="#7B8A88"
         android:textDirection="ltr"
         android:textSize="18sp"
         android:drawableLeft="@drawable/baseline_person_2_24"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -88,7 +87,7 @@
         android:backgroundTint="@null"
         android:paddingLeft="15dp"
         android:drawableLeft="@drawable/baseline_lock_24"
-        android:hint="Password"
+        android:hint="@string/password_hint"
         android:inputType="textPassword"
         android:textAlignment="textStart"
         android:textAllCaps="false"
@@ -108,13 +107,12 @@
         android:layout_height="49dp"
         android:background="@drawable/button_border"
         android:backgroundTint="#FF3CE7CA"
-        android:text="Login"
+        android:text="@string/login_button"
         android:textAlignment="gravity"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:textStyle="bold"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -127,7 +125,7 @@
         android:layout_width="189dp"
         android:layout_height="53dp"
         android:background="@android:color/transparent"
-        android:text="Forget Password?"
+        android:text="@string/forget_password"
         android:textAllCaps="false"
         android:textColor="#38B0F5"
         android:textSize="18dp"
@@ -142,7 +140,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New to OPD Manager app?"
+        android:text="@string/new_to_opd_manager"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -159,7 +157,7 @@
         android:layout_height="52dp"
         android:background="@android:color/transparent"
         android:backgroundTint="#ffffff"
-        android:text="Register"
+        android:text="@string/register_button"
         android:textColor="#FF3CE7CA"
         android:textAllCaps="false"
         android:textSize="16dp"
@@ -181,6 +179,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.202"
         app:srcCompat="@drawable/heart_attack" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

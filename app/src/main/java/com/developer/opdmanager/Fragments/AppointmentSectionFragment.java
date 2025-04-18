@@ -1,5 +1,8 @@
 package com.developer.opdmanager.Fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import com.developer.opdmanager.Models.Appointment;
 import com.developer.opdmanager.Models.CompletedAppointment;
 import com.developer.opdmanager.Models.Review;
 import com.developer.opdmanager.R;
+import com.developer.opdmanager.Utils.LocaleHelper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,6 +70,12 @@ public class AppointmentSectionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = requireActivity().getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "default");
+
+        if (!lang.equals("default")) {
+            LocaleHelper.setLocale(getActivity(), lang);
+        }
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

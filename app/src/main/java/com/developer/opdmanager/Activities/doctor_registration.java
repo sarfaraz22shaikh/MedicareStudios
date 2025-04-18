@@ -1,8 +1,10 @@
 package com.developer.opdmanager.Activities;
 import com.developer.opdmanager.R;
+import com.developer.opdmanager.Utils.LocaleHelper;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -34,6 +36,12 @@ public class doctor_registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "default");
+
+        if (!lang.equals("default")) {
+            LocaleHelper.setLocale(this, lang);
+        }
         setContentView(R.layout.doctor_registration);
 
 

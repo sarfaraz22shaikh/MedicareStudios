@@ -8,7 +8,11 @@
         <item>Afternoon</item>
         <item>Evening</item>
     </string-array>
-
+    <string-array name="multi_language">
+        <item>English</item>
+        <item>मराठी</item>
+        <item>हिंदी</item>
+    </string-array>
     <string-array name="max_person_options">
         <item>10</item>
         <item>20</item>
@@ -16,4 +20,77 @@
         <item>40</item>
         <item>50</item>
     </string-array>
+
+    <string name="doctor">Doctor</string>
+    <string name="Patient">Patient</string>
+<string name="greeting_patient">Hello Prasad</string>
+<string name="clinic_visit">Clinic visit</string>
+<string name="make_an_appointment">Make an Appointment</string>
+<string name="home_visit">Home visit</string>
+<string name="Call_the_doctor_home">Call the doctor home</string>
+<string name="What_are_your_symptoms">What are your symptoms?</string>
+<string name="Doctors_Near_You">Doctors Near You</string>
+    //patient login
+        <!-- Text for Buttons and Labels -->
+        <string name="login_button_text">Login</string>
+        <string name="forget_password">Forget Password?</string>
+        <string name="new_to_opd_manager">New to OPD Manager app?</string>
+        <string name="register_button_text">Register</string>
+        <string name="patient_label">PATIENT</string>
+        <string name="email_hint">Email</string>
+        <string name="password_hint">Password</string>
+    //doctor login
+    <string name="username_hint">Username</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="fullname_hint">Full Name</string>
+    <string name="mobile_hint">Mobile No</string>
+    <string name="next_button">Next</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="doctor_registration">DOCTOR REGISTRATION</string>
+    <string name="specialization_hint">Specialization</string>
+    <string name="professional_exp_hint">Professional Experience</string>
+    <string name="location_hint">Location</string>
+    <string name="patient_registration">PATIENT REGISTRATION</string>
+    <string name="profile_name">Prasad Chinchole</string>
+    <string name="phone_number">+91 7219634494</string>
+    <string name="support_title">Q UP SUPPORT</string>
+    <string name="support_message">We are committed to make your OPD experience painless.</string>
+    <string name="about_title">About</string>
+    <string name="terms_conditions">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="logout">Logout</string>
+    <string name="cough">Cough</string>
+    <string name="snuffle">Snuffle</string>
+    <string name="fever">Fever</string>
+    <string name="category">Category</string>
+    <string name="neurologist">Neurologist</string>
+    <string name="orthopadist">Orthopadist</string>
+    <string name="cardiologist">Cardiologist</string>
+    <string name="nefrologist">Nefrologist</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="dr_suraj_mankar">Dr Suraj Mankar</string>
+    <string name="search_hint">Search</string>
+    <string name="back_description">Back button</string>
+    <string name="appointments">Appointments</string>
+    <string name="language">Select Language</string>
+    <string name="about_doctor">About Doctor</string>
+    <string name="reviews">Reviews</string>
+    <string name="Book_appointment">Book Appointment</string>
+    <string name="create_slots">Create Slots</string>
+    <string name="clinic_time">CLINIC TIME</string>
+    <string name="opening_time">Opening Time</string>
+    <string name="closing_time">Closing Time</string>
+    <string name="slot_duration">SLOT DURATION</string>
+    <string name="hours">Hours</string>
+    <string name="mins">Mins</string>
+    <string name="max_person_per_slot">MAX PERSON PER SLOT</string>
+    <string name="create_slot">Create Slot</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="doctor_message">Compassionate physician dedicated to patient-centered, evidence-based care.</string>
+
+
 </resources>

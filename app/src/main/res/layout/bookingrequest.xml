@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:text="Decline"
+                android:text="@string/decline"
                 android:backgroundTint="@android:color/darker_gray"
                 android:background="@drawable/button_border"
                 android:textColor="@android:color/white" />
@@ -93,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:text="Accept"
+                android:text="@string/accept"
                 android:backgroundTint="#38B0F5"
                 android:background="@drawable/button_border"
                 android:textColor="@android:color/white" />

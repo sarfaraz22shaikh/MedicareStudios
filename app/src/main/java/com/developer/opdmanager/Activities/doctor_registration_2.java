@@ -2,6 +2,7 @@ package com.developer.opdmanager.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.AutoCompleteTextView;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.developer.opdmanager.R;
+import com.developer.opdmanager.Utils.LocaleHelper;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +34,12 @@ public class doctor_registration_2 extends AppCompatActivity {
     @SuppressLint("CutPasteId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "default");
+
+        if (!lang.equals("default")) {
+            LocaleHelper.setLocale(this, lang);
+        }
         setContentView(R.layout.doctor_registration_2);
 
         // Initialize Firebase

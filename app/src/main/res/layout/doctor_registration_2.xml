@@ -4,15 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="427dp"
         android:layout_height="627dp"
-
         android:background="@drawable/bg_design_doc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +25,7 @@
             android:backgroundTint="@null"
             android:drawableLeft="@drawable/baseline_person_2_24"
             android:drawablePadding="5dp"
-            android:hint="Specialization"
+            android:hint="@string/specialization_hint"
             android:paddingLeft="15dp"
             android:textAlignment="textStart"
             android:textAllCaps="false"
@@ -51,7 +48,7 @@
             android:drawableLeft="@drawable/baseline_alternate_email_24"
             android:drawablePadding="5dp"
             android:inputType="text"
-            android:hint="Professtional Experience"
+            android:hint="@string/professional_exp_hint"
             android:paddingLeft="15dp"
             android:textAlignment="textStart"
             android:textAllCaps="false"
@@ -73,7 +70,7 @@
             android:backgroundTint="@null"
             android:drawableLeft="@drawable/baseline_location_pin_24"
             android:drawablePadding="5dp"
-            android:hint="location"
+            android:hint="@string/location_hint"
             android:inputType="text"
             android:paddingLeft="15dp"
             android:textAlignment="textStart"
@@ -94,7 +91,7 @@
             android:layout_height="49dp"
             android:background="@drawable/button_border"
             android:backgroundTint="#FF3CE7CA"
-            android:text="Register"
+            android:text="@string/register_button"
             android:textAlignment="gravity"
             android:textAllCaps="false"
             android:textColor="#ffffff"
@@ -109,24 +106,20 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:padding="20dp"
-        android:text="DOCTOR REGISTRATION"
+        android:text="@string/doctor_registration"
         android:textSize="24sp"
         android:textStyle="bold"
-
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.441" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

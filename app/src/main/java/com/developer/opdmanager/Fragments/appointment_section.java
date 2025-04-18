@@ -16,6 +16,7 @@ public class appointment_section extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.appointment_section); // Layout for your activity
 
 

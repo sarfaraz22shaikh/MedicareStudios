@@ -1,7 +1,12 @@
 package com.developer.opdmanager.Fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,9 +25,12 @@ import android.widget.TextView;
 
 import com.developer.opdmanager.Activities.search_doctor;
 import com.developer.opdmanager.R;
+import com.developer.opdmanager.Utils.LocaleHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +73,12 @@ public class Home_section extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = requireActivity().getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "default");
+
+        if (!lang.equals("default")) {
+            LocaleHelper.setLocale(getActivity(), lang);
+        }
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -132,7 +146,7 @@ public class Home_section extends Fragment {
         // Close button listener
         btnClosePopup.setOnClickListener(v -> closePopup(popupOverlay,popupBox));
 
-
+        setLocale(getContext(),"mr");
 
 
 
@@ -143,6 +157,15 @@ public class Home_section extends Fragment {
 
         return view;
 
+    }
+    public void setLocale(Context context, String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
     // Reusable function to show popup
@@ -214,15 +237,6 @@ public class Home_section extends Fragment {
                         else {
                             patientName.setText("No name found");
                         }
-
-
-//                            if (name != null) {
-//                                patientName.setText("Hello " + name);
-//                                Log.d("FirestoreFetch", "Fetched patient name: " + name);
-//                            } else {
-//                                patientName.setText("No name found");
-//                                Log.e("FirestoreFetch", "Field 'name' is null");
-//                            }
                         } else {
                             Log.e("FirestoreFetch", "No document found for patient ID: " + patientId);
                         }

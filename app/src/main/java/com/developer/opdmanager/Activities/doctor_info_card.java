@@ -2,6 +2,7 @@ package com.developer.opdmanager.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developer.opdmanager.Adapters.ReviewAdapter;
 import com.developer.opdmanager.Models.ReviewModel;
 import com.developer.opdmanager.R;
+import com.developer.opdmanager.Utils.LocaleHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,7 +36,7 @@ public class doctor_info_card extends AppCompatActivity {
     private FirebaseFirestore db;
     private String doctorId;
     RecyclerView recyclerView;
-    TextView doctorNameTextView;
+    TextView doctorNameTextView,doctorSpecialization,location;
     Button bookAppointment;
     ImageView callDial;
     String name;
@@ -43,6 +45,12 @@ public class doctor_info_card extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "default");
+
+        if (!lang.equals("default")) {
+            LocaleHelper.setLocale(this, lang);
+        }
         setContentView(R.layout.doctor_info_card);
 
         db = FirebaseFirestore.getInstance();
@@ -52,6 +60,8 @@ public class doctor_info_card extends AppCompatActivity {
         doctorNameTextView = findViewById(R.id.textView22);
         bookAppointment = findViewById(R.id.AppointmentButton);
         callDial = findViewById(R.id.callDial);
+        doctorSpecialization = findViewById(R.id.specialization);
+        location = findViewById(R.id.location);
 
         // Get doctor name from Intent
         name = getIntent().getStringExtra("name");
@@ -95,6 +105,10 @@ public class doctor_info_card extends AppCompatActivity {
                     if (task.isSuccessful() && !task.getResult().isEmpty()) {
                         DocumentSnapshot document = task.getResult().getDocuments().get(0);
                         doctorId = document.getId();
+                        String specialization = document.getString("specialization");
+                        String loc = document.getString("location");
+                        location.setText(loc);
+                        doctorSpecialization.setText(specialization);
                         Log.d("DoctorInfo", "Doctor ID: " + doctorId);
                         Toast.makeText(this, "Doctor found: " + doctorId, Toast.LENGTH_SHORT).show();
 

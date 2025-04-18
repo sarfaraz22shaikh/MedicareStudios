@@ -6,9 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F7FA"
- >
+    >
 
-    <!-- ScrollView to make content scrollable -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -29,7 +28,7 @@
                 android:id="@+id/profileTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Prasad Chinchole"
+                android:text="@string/profile_name"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -39,12 +38,10 @@
                 android:id="@+id/phoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+91 7219634494"
+                android:text="@string/phone_number"
                 android:textSize="16sp"
                 android:textColor="#666666"
                 android:layout_marginBottom="16dp"/>
-
-            <!-- Language Selection -->
 
             <!-- Q Up Support Section -->
             <androidx.cardview.widget.CardView
@@ -63,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Q UP SUPPORT"
+                        android:text="@string/support_title"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#000000"
@@ -72,7 +69,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="We are committed to make your OPD experience painless."
+                        android:text="@string/support_message"
                         android:textSize="14sp"
                         android:textColor="#666666"
                         android:layout_marginBottom="16dp"/>
@@ -82,7 +79,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center">
-
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -91,7 +87,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About"
+                android:text="@string/about_title"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -100,7 +96,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="We are committed to make your OPD experience painless."
+                android:text="@string/support_message"
                 android:textSize="14sp"
                 android:textColor="#666666"
                 android:layout_marginBottom="8dp"/>
@@ -108,7 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Terms and Conditions"
+                android:text="@string/terms_conditions"
                 android:textSize="14sp"
                 android:textColor="#00A4B4"
                 android:layout_marginBottom="8dp"/>
@@ -116,21 +112,34 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Privacy Policy"
+                android:text="@string/privacy_policy"
                 android:textSize="14sp"
                 android:textColor="#00A4B4"
                 android:layout_marginBottom="16dp"/>
 
             <!-- Logout Button -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/logoutButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logout"
+                android:text="@string/logout"
                 android:textSize="16sp"
                 android:textColor="#000000"
                 android:background="@drawable/logout_button_background"
                 android:padding="12dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                android:id="@+id/languageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/language"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:background="@drawable/logout_button_background"
+                android:padding="12dp" />
+
+
         </LinearLayout>
     </ScrollView>
 

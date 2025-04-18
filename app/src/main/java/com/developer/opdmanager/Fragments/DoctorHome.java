@@ -1,6 +1,9 @@
 package com.developer.opdmanager.Fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +24,7 @@ import com.developer.opdmanager.Utils.BookingFetcher;
 import com.developer.opdmanager.Models.Bookingrequest;
 import com.developer.opdmanager.Utils.CreateSlots;
 import com.developer.opdmanager.R;
+import com.developer.opdmanager.Utils.LocaleHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +44,12 @@ public class DoctorHome extends Fragment implements BookingFetcher.BookingFetchL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        SharedPreferences prefs = requireActivity().getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "default");
+
+        if (!lang.equals("default")) {
+            LocaleHelper.setLocale(getActivity(), lang);
+        }
         View view = inflater.inflate(R.layout.fragment_doctor_home, container, false);
 
 

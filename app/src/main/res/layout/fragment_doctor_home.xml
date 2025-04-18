@@ -97,7 +97,7 @@
         android:layout_height="49dp"
         android:background="@drawable/button_border"
         android:backgroundTint="#38B0f5"
-        android:text="Create Slots"
+        android:text="@string/create_slots"
         android:textAlignment="gravity"
         android:textAllCaps="false"
         android:textColor="#ffffff"
