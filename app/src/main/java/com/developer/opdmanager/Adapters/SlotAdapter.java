@@ -48,75 +48,67 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
     @Override
     public void onBindViewHolder(@NonNull SlotViewHolder holder, int position) {
         SlotModel slot = slotList.get(position);
-        
-        // Check if the slot is available based on currentBooking vs maxBooking
         boolean isSlotAvailable = slot.getCurrentBookings() < slot.getMaxBookings();
-        
-        // Check if the current user has booked this slot and get its status
+
         FirebaseFirestore.getInstance()
-            .collection("doctors")
-            .document(doctorId)
-            .collection("slots")
-            .document(slot.getSlotId())
-            .collection("bookings")
-            .whereEqualTo("patientId", currentUser)
-            .get()
-            .addOnSuccessListener(queryDocumentSnapshots -> {
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    // User has booked this slot, get the status
-                    DocumentSnapshot bookingDoc = queryDocumentSnapshots.getDocuments().get(0);
-                    String bookingStatus = bookingDoc.getString("status");
-                    
-                    if (bookingStatus != null) {
-                        switch (bookingStatus.toLowerCase()) {
-                            case "approved":
-                                holder.status.setText("Approved");
-                                holder.status.setTextColor(Color.parseColor("#4CAF50")); // Green for Approved
-                                holder.bookButton.setVisibility(View.GONE);
-                                break;
+                .collection("doctors")
+                .document(doctorId)
+                .collection("slots")
+                .document(slot.getSlotId())
+                .collection("bookings")
+                .whereEqualTo("patientId", currentUser)
+                .addSnapshotListener((queryDocumentSnapshots, error) -> {
+                    if (error != null) {
+                        Log.e("Firestore", "Listen failed", error);
+                        holder.status.setText("Available");
+                        holder.status.setTextColor(Color.parseColor("#4CAF50"));
+                        holder.bookButton.setVisibility(View.VISIBLE);
+                        return;
+                    }
+
+                    if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()) {
+                        DocumentSnapshot bookingDoc = queryDocumentSnapshots.getDocuments().get(0);
+                        String bookingStatus = bookingDoc.getString("status");
+
+                        if (bookingStatus != null) {
+                            switch (bookingStatus.toLowerCase()) {
+                                case "approved":
+                                    holder.status.setText("Approved");
+                                    holder.status.setTextColor(Color.parseColor("#4CAF50"));
+                                    holder.bookButton.setVisibility(View.GONE);
+                                    break;
                                 case "completed":
-                                holder.status.setText("completed");
-                                holder.status.setTextColor(Color.parseColor("#4CAF50")); // Red for Rejected
-                                holder.bookButton.setVisibility(View.GONE);
-                                break;
-                            case "rejected":
-                                holder.status.setText("Rejected");
-                                holder.status.setTextColor(Color.parseColor("#FF5555")); // Red for Rejected
-                                holder.bookButton.setVisibility(View.GONE);
-                                break;
-                            case "pending":
-                            default:
-                                holder.status.setText("Pending");
-                                holder.status.setTextColor(Color.parseColor("#FFA500")); // Orange for Pending
-                                holder.bookButton.setVisibility(View.GONE);
-                                break;
+                                    holder.status.setText("Completed");
+                                    holder.status.setTextColor(Color.parseColor("#4CAF50"));
+                                    holder.bookButton.setVisibility(View.GONE);
+                                    break;
+                                case "rejected":
+                                    holder.status.setText("Rejected");
+                                    holder.status.setTextColor(Color.parseColor("#FF5555"));
+                                    holder.bookButton.setVisibility(View.GONE);
+                                    break;
+                                case "pending":
+                                default:
+                                    holder.status.setText("Pending");
+                                    holder.status.setTextColor(Color.parseColor("#FFA500"));
+                                    holder.bookButton.setVisibility(View.GONE);
+                                    break;
+                            }
+                        } else {
+                            holder.status.setText("Pending");
+                            holder.status.setTextColor(Color.parseColor("#FFA500"));
+                            holder.bookButton.setVisibility(View.GONE);
                         }
+                    } else if (isSlotAvailable) {
+                        holder.status.setText("Available");
+                        holder.status.setTextColor(Color.parseColor("#4CAF50"));
+                        holder.bookButton.setVisibility(View.VISIBLE);
                     } else {
-                        // If status is null, default to Pending
-                        holder.status.setText("Pending");
-                        holder.status.setTextColor(Color.parseColor("#FFA500"));
+                        holder.status.setText("Booked");
+                        holder.status.setTextColor(Color.parseColor("#FF5555"));
                         holder.bookButton.setVisibility(View.GONE);
                     }
-                } else if (isSlotAvailable) {
-                    // If the slot is available and not booked by the user, show "Available"
-                    holder.status.setText("Available");
-                    holder.status.setTextColor(Color.parseColor("#4CAF50")); // Green for Available
-                    holder.bookButton.setVisibility(View.VISIBLE); // Show button
-                } else {
-                    // If the slot is full (not available), hide button and show "Booked"
-                    holder.status.setText("Booked");
-                    holder.status.setTextColor(Color.parseColor("#FF5555")); // Red for Booked
-                    holder.bookButton.setVisibility(View.GONE);
-                }
-            })
-            .addOnFailureListener(e -> {
-                Log.e("Firestore", "Error checking booking status", e);
-                // Default to available if there's an error
-                holder.status.setText("Available");
-                holder.status.setTextColor(Color.parseColor("#4CAF50"));
-                holder.bookButton.setVisibility(View.VISIBLE);
-            });
-
+                });
         holder.startTime.setText(slot.getStartTime());
         holder.endTime.setText(slot.getEndTime());
         Log.d("SlotID", "onBindViewHolder: " + slot.getSlotId());
@@ -148,7 +140,6 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return slotList.size();

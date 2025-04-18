@@ -8,7 +8,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TabStopSpan;
@@ -60,6 +62,14 @@ public class DoctorHome extends Fragment implements BookingFetcher.BookingFetchL
         recyclerView = view.findViewById(R.id.recyclerViewAppointments);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
+
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            bookingFetcher.fetchPendingBookings(); // or your data refresh method
+
+            // Optional: stop the refresh animation after some delay
+            new Handler().postDelayed(() -> swipeRefreshLayout.setRefreshing(false), 1000);
+        });
         // Set up RecyclerView adapter
         adapter = new BookingAdapter();
         recyclerView.setAdapter(adapter);

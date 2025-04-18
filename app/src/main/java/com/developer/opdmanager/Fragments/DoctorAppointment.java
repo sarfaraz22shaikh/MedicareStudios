@@ -4,7 +4,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TabStopSpan;
@@ -83,6 +85,14 @@ public class DoctorAppointment extends Fragment implements BookingFetcher.Bookin
         spannableString.setSpan(tabStop, 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         TextView textView = view.findViewById(R.id.formaltext);
         textView.setText(spannableString);
+
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            // or your data refresh method
+            bookingFetcher.fetchApprovedBookings();
+            // Optional: stop the refresh animation after some delay
+            new Handler().postDelayed(() -> swipeRefreshLayout.setRefreshing(false), 1000);
+        });
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.appointmentsRecyclerView);
