@@ -155,10 +155,12 @@ public class doctor_info_card extends AppCompatActivity {
 
                         // Callback se naam lekar ReviewModel me daal
                         fetchPatientName(patientId, patientName -> {
-                            reviewList.add(new ReviewModel(patientName, rating, reviewText));
+                           if(rating != 0){
+                               reviewList.add(new ReviewModel(patientName, rating, reviewText));
+                           }
 
                             // Adapter sirf jab pura data aa jaye tab set kar — ya ek kaam yeh bhi kar sakte
-                            if (reviewList.size() == queryDocumentSnapshots.size()) {
+                            if (reviewList.size() >= 0) {
                                 ReviewAdapter adapter = new ReviewAdapter(reviewList);
                                 recyclerView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();

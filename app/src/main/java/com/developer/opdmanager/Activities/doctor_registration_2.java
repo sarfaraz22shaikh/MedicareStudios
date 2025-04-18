@@ -112,6 +112,7 @@ public class doctor_registration_2 extends AppCompatActivity {
             doctors.put("specialization", spec);
             doctors.put("year_of_experience", experience);
             doctors.put("location", locate);
+            doctors.put("rating","2.5");
 
             // ✅ Store data using UID instead of generating a random ID
             db.collection("doctors").document(userId)

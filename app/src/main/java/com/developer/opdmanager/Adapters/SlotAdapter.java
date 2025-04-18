@@ -74,6 +74,11 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
                                 holder.status.setTextColor(Color.parseColor("#4CAF50")); // Green for Approved
                                 holder.bookButton.setVisibility(View.GONE);
                                 break;
+                                case "completed":
+                                holder.status.setText("completed");
+                                holder.status.setTextColor(Color.parseColor("#4CAF50")); // Red for Rejected
+                                holder.bookButton.setVisibility(View.GONE);
+                                break;
                             case "rejected":
                                 holder.status.setText("Rejected");
                                 holder.status.setTextColor(Color.parseColor("#FF5555")); // Red for Rejected

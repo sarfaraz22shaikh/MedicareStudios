@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developer.opdmanager.Activities.payment;
@@ -26,8 +27,11 @@ import com.developer.opdmanager.Models.CompletedAppointment;
 import com.developer.opdmanager.Models.Review;
 import com.developer.opdmanager.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -96,7 +100,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
                 submitButton.setOnClickListener(btn -> {
                     float rating = ratingBar.getRating();
                     String review = reviewEditText.getText().toString().trim();
-
+                    updateRating(appointment.getDoctorId(),rating);
                     if (rating == 0 || review.isEmpty()) {
                         Toast.makeText(context, "Please enter both rating and review.", Toast.LENGTH_SHORT).show();
                         return;
@@ -127,6 +131,48 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         });
         holder.payButton.setOnClickListener(v -> onPayClick(position));
 
+    }
+public void updateRating(String doctorId, float newRating) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference doctorRef = db.collection("doctors").document(doctorId);
+
+        doctorRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                String currentRatingStr = documentSnapshot.getString("rating");
+                if (currentRatingStr != null) {
+                    // Convert string to float
+                    float currentRating = Float.parseFloat(currentRatingStr);
+
+                    // Average calculation
+                    float updatedRating = (currentRating + newRating) / 2;
+
+                    // Convert back to string
+                    String updatedRatingStr = String.valueOf(updatedRating);
+
+                    // Update Firestore
+                    doctorRef.update("rating", updatedRatingStr)
+                            .addOnSuccessListener(aVoid -> {
+                                Log.d("updateRating", "Rating updated successfully!");
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e("updateRating", "Failed to update rating", e);
+                            });
+                } else {
+                    // No existing rating — set new rating directly
+                    doctorRef.update("rating", String.valueOf(newRating))
+                            .addOnSuccessListener(aVoid -> {
+                                Log.d("updateRating", "Rating set successfully!");
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e("updateRating", "Failed to set rating", e);
+                            });
+                }
+            } else {
+                Log.e("updateRating", "Doctor not found!");
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("updateRating", "Failed to fetch doctor", e);
+        });
     }
 
     @Override
