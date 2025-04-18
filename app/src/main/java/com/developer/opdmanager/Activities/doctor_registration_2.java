@@ -98,7 +98,7 @@ public class doctor_registration_2 extends AppCompatActivity {
             Intent intent = getIntent();
             String name = intent.getStringExtra("name");
             String email = intent.getStringExtra("email");
-            String phoneNumber = intent.getStringExtra("phonenum");
+            String phoneNumber = intent.getStringExtra("phoneNumber");
             String gender = intent.getStringExtra("gender");
             String spec = specialization.getText().toString().trim();
             String experience = professional_exp.getText().toString().trim();

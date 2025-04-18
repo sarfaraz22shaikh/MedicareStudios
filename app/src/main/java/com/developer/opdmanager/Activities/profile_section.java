@@ -6,6 +6,7 @@ import static androidx.core.app.ActivityCompat.recreate;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -16,9 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.developer.opdmanager.R;
 import com.developer.opdmanager.Utils.LocaleHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +77,7 @@ public class profile_section extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    TextView  name,number;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +85,19 @@ public class profile_section extends Fragment {
         View rootView = inflater.inflate(R.layout.profile_section, container, false);
 
         Button languageButton = rootView.findViewById(R.id.languageButton);
+        Button logOut = rootView.findViewById(R.id.logoutButton);
+        name = rootView.findViewById(R.id.profileTitle);
+        number = rootView.findViewById(R.id.phoneNumber);
+
+        fetchUserDetails();
+
         languageButton.setOnClickListener(v -> showLanguageDialog());
+        logOut.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear back stack
+            startActivity(intent);
+        });
         return rootView;
     }
     private void showLanguageDialog() {
@@ -111,5 +129,19 @@ public class profile_section extends Fragment {
         });
 
         builder.show();
+    }
+    private void fetchUserDetails(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String patientId = currentUser.getUid();
+        db.collection("Patients").document(patientId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String naam = documentSnapshot.getString("name");
+                        String phoneno = documentSnapshot.getString("phoneNumber");
+                        name.setText(naam);
+                        number.setText("+91 "+phoneno);
+                    }
+                });
     }
 }
