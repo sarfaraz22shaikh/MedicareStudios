@@ -1,0 +1,94 @@
+<resources>
+        <string name="app_name">मेडिकेयर +</string>
+        <string name="underlined_text"><u>ईमेल पुनः भेजें</u></string>
+        <string name="hello_blank_fragment">हैलो ब्लैंक फ्रैगमेंट</string>
+
+        <string-array name="time_periods">
+            <item>सुबह</item>
+            <item>दोपहर</item>
+            <item>शाम</item>
+        </string-array>
+
+        <string-array name="multi_language">
+            <item>अंग्रेज़ी</item>
+            <item>मराठी</item>
+            <item>हिंदी</item>
+        </string-array>
+
+        <string-array name="max_person_options">
+            <item>10</item>
+            <item>20</item>
+            <item>30</item>
+            <item>40</item>
+            <item>50</item>
+        </string-array>
+        <string name="doctor">डॉक्टर</string>
+        <string name="Patient">रोगी</string>
+        <string name="greeting_patient">नमस्ते प्रसाद</string>
+        <string name="clinic_visit">क्लिनिक विज़िट</string>
+        <string name="make_an_appointment">अपॉइंटमेंट लें</string>
+        <string name="home_visit">होम विज़िट</string>
+        <string name="Call_the_doctor_home">डॉक्टर को घर बुलाएं</string>
+        <string name="What_are_your_symptoms">आपके लक्षण क्या हैं?</string>
+        <string name="Doctors_Near_You">आपके पास के डॉक्टर</string>
+    //patient login
+    <string name="login_button_text">लॉगिन</string>
+    <string name="forget_password">पासवर्ड भूल गए?</string>
+    <string name="new_to_opd_manager">OPD Manager ऐप में नए?</string>
+    <string name="register_button_text">रजिस्टर करें</string>
+    <string name="patient_label">रोगी</string>
+    <string name="email_hint">ईमेल</string>
+    <string name="password_hint">पासवर्ड</string>
+    //profile section
+    <string name="profile_name">प्रसाद चिंचोले</string>
+    <string name="phone_number">+91 7219634494</string>
+    <string name="support_title">क्यू अप समर्थन</string>
+    <string name="support_message">हम आपके ओपीडी अनुभव को सहज बनाने के लिए प्रतिबद्ध हैं।</string>
+    <string name="about_title">परिचय</string>
+    <string name="terms_conditions">नियम और शर्तें</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="logout">लॉगआउट</string>
+    <string name="username_hint">उपयोगकर्ता नाम</string>
+    <string name="login_button">लॉग इन</string>
+    <string name="register_button">रजिस्टर करें</string>
+    <string name="fullname_hint">पूरा नाम</string>
+    <string name="mobile_hint">मोबाइल नंबर</string>
+    <string name="next_button">अगला</string>
+    <string name="male">पुरुष</string>
+    <string name="female">महिला</string>
+    <string name="other">अन्य</string>
+    <string name="doctor_registration">डॉक्टर रजिस्ट्रेशन</string>
+    <string name="specialization_hint">विशेषज्ञता</string>
+    <string name="professional_exp_hint">पेशेवर अनुभव</string>
+    <string name="location_hint">स्थान</string>
+    <string name="patient_registration">पेशेंट रजिस्ट्रेशन</string>
+    <string name="cough">खांसी</string>
+    <string name="snuffle">नाक बहना</string>
+    <string name="fever">बुखार</string>
+    <string name="category">श्रेणी</string>
+    <string name="neurologist">तंत्रिका रोग विशेषज्ञ</string>
+    <string name="orthopadist">अस्थि रोग विशेषज्ञ</string>
+    <string name="cardiologist">हृदय रोग विशेषज्ञ</string>
+    <string name="nefrologist">गुर्दा रोग विशेषज्ञ</string>
+    <string name="recent_searches">हाल की खोजें</string>
+    <string name="dr_suraj_mankar">डॉ. सूरज मानकर</string>
+    <string name="search_hint">खोजें</string>
+    <string name="back_description">वापस बटन</string>
+    <string name="appointments">नियुक्तियाँ</string>
+    <string name="language">भाषा चुनें</string>
+    <string name="about_doctor">डॉक्टर के बारे में</string>
+    <string name="reviews">समीक्षा</string>
+    <string name="Book_appointment">अपॉइंटमेंट बुक करें</string>
+    <string name="create_slots">स्लॉट बनाएं</string>
+    <string name="clinic_time">क्लिनिक समय</string>
+    <string name="opening_time">खुलने का समय</string>
+    <string name="closing_time">बंद होने का समय</string>
+    <string name="slot_duration">स्लॉट की अवधि</string>
+    <string name="hours">घंटे</string>
+    <string name="mins">मिनट</string>
+    <string name="max_person_per_slot">प्रत्येक स्लॉट पर अधिकतम व्यक्ति</string>
+    <string name="create_slot">स्लॉट बनाएं</string>
+    <string name="accept">स्वीकार करें</string>
+    <string name="decline">अस्वीकार करें</string>
+    <string name="doctor_message">रोगी-केंद्रित, साक्ष्य-आधारित देखभाल के लिए समर्पित दयालु चिकित्सक.</string>
+</resources>

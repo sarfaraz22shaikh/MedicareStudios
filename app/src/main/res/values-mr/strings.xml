@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">मेडिकेअर +</string>
+    <string name="underlined_text"><u>ईमेल पुन्हा पाठवा</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">हॅलो रिकामा तुकडा</string>
+    <string-array name="time_periods">
+        <item>सकाळ</item>
+        <item>दुपार</item>
+        <item>संध्याकाळ</item>
+    </string-array>
+    <string-array name="multi_language">
+        <item>English</item>
+        <item>मराठी</item>
+        <item>हिंदी</item>
+    </string-array>
+    <string-array name="max_person_options">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+
+    <string name="doctor">डॉक्टर</string>
+    <string name="Patient">रुग्ण</string>
+    <string name="greeting_patient">हॅलो प्रसाद</string>
+    <string name="clinic_visit">क्लिनिक भेट</string>
+    <string name="make_an_appointment">भेटीची वेळ घ्या</string>
+    <string name="home_visit">घर भेट</string>
+    <string name="Call_the_doctor_home">डॉक्टरला घरी बोलवा</string>
+    <string name="What_are_your_symptoms">तुमची लक्षणे काय आहेत?</string>
+    <string name="Doctors_Near_You">तुमच्या जवळचे डॉक्टर</string>
+    <!-- patient login -->
+    <string name="login_button_text">लॉगिन</string>
+    <string name="forget_password">पासवर्ड विसरलात?</string>
+    <string name="new_to_opd_manager">OPD मॅनेजर अॅपमध्ये नवीन आहात?</string>
+    <string name="register_button_text">नोंदणी करा</string>
+    <string name="patient_label">रुग्ण</string>
+    <string name="email_hint">ईमेल</string>
+    <string name="password_hint">पासवर्ड</string>
+    <!-- doctor login -->
+    <string name="username_hint">वापरकर्तानाव</string>
+    <string name="login_button">लॉगिन</string>
+    <string name="register_button">नोंदणी करा</string>
+    <string name="fullname_hint">पूर्ण नाव</string>
+    <string name="mobile_hint">मोबाइल क्रमांक</string>
+    <string name="next_button">पुढे</string>
+    <string name="male">पुरुष</string>
+    <string name="female">स्त्री</string>
+    <string name="other">इतर</string>
+    <string name="doctor_registration">डॉक्टर नोंदणी</string>
+    <string name="specialization_hint">विशेषीकरण</string>
+    <string name="professional_exp_hint">व्यावसायिक अनुभव</string>
+    <string name="location_hint">स्थान</string>
+    <string name="patient_registration">रुग्ण नोंदणी</string>
+    <string name="profile_name">प्रसाद चिंचोले</string>
+    <string name="phone_number">+91 7219634494</string>
+    <string name="support_title">Q UP समर्थन</string>
+    <string name="support_message">आम्ही तुमचा OPD अनुभव वेदनारहित करण्यासाठी वचनबद्ध आहोत.</string>
+    <string name="about_title">बद्दल</string>
+    <string name="terms_conditions">नियम आणि अटी</string>
+    <string name="privacy_policy">गोपनीयता धोरण</string>
+    <string name="logout">लॉगआउट</string>
+    <string name="cough">खोकला</string>
+    <string name="snuffle">नाक गळणे</string>
+    <string name="fever">ताप</string>
+    <string name="category">श्रेणी</string>
+    <string name="neurologist">न्यूरोलॉजिस्ट</string>
+    <string name="orthopadist">ऑर्थोपेडिस्ट</string>
+    <string name="cardiologist">हृदयरोगतज्ज्ञ</string>
+    <string name="nefrologist">नेफ्रोलॉजिस्ट</string>
+    <string name="recent_searches">अलीकडील शोध</string>
+    <string name="dr_suraj_mankar">डॉ. सूरज मंकर</string>
+    <string name="search_hint">शोधा</string>
+    <string name="back_description">मागे बटण</string>
+    <string name="appointments">भेटी</string>
+    <string name="language">भाषा निवडा</string>
+    <string name="about_doctor">डॉक्टरबद्दल</string>
+    <string name="reviews">पुनरावलोकने</string>
+    <string name="Book_appointment">भेटीची वेळ बुक करा</string>
+    <string name="create_slots">स्लॉट्स तयार करा</string>
+    <string name="clinic_time">क्लिनिक वेळ</string>
+    <string name="opening_time">उघडण्याची वेळ</string>
+    <string name="closing_time">बंद करण्याची वेळ</string>
+    <string name="slot_duration">स्लॉट कालावधी</string>
+    <string name="hours">तास</string>
+    <string name="mins">मिनिटे</string>
+    <string name="max_person_per_slot">प्रति स्लॉट कमाल व्यक्ती</string>
+    <string name="create_slot">स्लॉट तयार करा</string>
+    <string name="accept">स्वीकारा</string>
+    <string name="decline">नाकारा</string>
+    <string name="doctor_message">रुग्ण-केंद्रित, पुराव्यावर आधारित काळजीसाठी समर्पित दयाळू वैद्य.</string>
+</resources>

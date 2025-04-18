@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">மெடிகேர் +</string>
+    <string name="underlined_text"><u>மின்னஞ்சலை மீண்டும் அனுப்பு</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">வணக்கம் வெற்று பகுதி</string>
+    <string-array name="time_periods">
+        <item>காலை</item>
+        <item>மதியம்</item>
+        <item>மாலை</item>
+    </string-array>
+    <string-array name="multi_language">
+        <item>ஆங்கிலம்</item>
+        <item>मराठी</item>
+        <item>हिंदी</item>
+    </string-array>
+    <string-array name="max_person_options">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+
+    <string name="doctor">மருத்துவர்</string>
+    <string name="Patient">நோயாளி</string>
+    <string name="greeting_patient">வணக்கம் பிரசாத்</string>
+    <string name="clinic_visit">மருத்துவமனை வருகை</string>
+    <string name="make_an_appointment">நேரம் ஒதுக்கீடு செய்</string>
+    <string name="home_visit">வீட்டு வருகை</string>
+    <string name="Call_the_doctor_home">மருத்துவரை வீட்டிற்கு அழை</string>
+    <string name="What_are_your_symptoms">உங்கள் அறிகுறிகள் என்ன?</string>
+    <string name="Doctors_Near_You">உங்களுக்கு அருகிலுள்ள மருத்துவர்கள்</string>
+    <!-- patient login -->
+    <string name="login_button_text">உள்நுழை</string>
+    <string name="forget_password">கடவுச்சொல் மறந்துவிட்டதா?</string>
+    <string name="new_to_opd_manager">OPD மேலாளர் பயன்பாட்டில் புதியவரா?</string>
+    <string name="register_button_text">பதிவு செய்</string>
+    <string name="patient_label">நோயாளி</string>
+    <string name="email_hint">மின்னஞ்சல்</string>
+    <string name="password_hint">கடவுச்சொல்</string>
+    <!-- doctor login -->
+    <string name="username_hint">பயனர்பெயர்</string>
+    <string name="login_button">உள்நுழை</string>
+    <string name="register_button">பதிவு செய்</string>
+    <string name="fullname_hint">முழு பெயர்</string>
+    <string name="mobile_hint">கைபேசி எண்</string>
+    <string name="next_button">அடுத்து</string>
+    <string name="male">ஆண்</string>
+    <string name="female">பெண்</string>
+    <string name="other">மற்றவை</string>
+    <string name="doctor_registration">மருத்துவர் பதிவு</string>
+    <string name="specialization_hint">சிறப்பு</string>
+    <string name="professional_exp_hint">தொழில்முறை அனுபவம்</string>
+    <string name="location_hint">இடம்</string>
+    <string name="patient_registration">நோயாளி பதிவு</string>
+    <string name="profile_name">பிரசாத் சின்சோலே</string>
+    <string name="phone_number">+91 7219634494</string>
+    <string name="support_title">Q UP ஆதரவு</string>
+    <string name="support_message">உங்கள் OPD அனுபவத்தை வலியற்றதாக மாற்ற நாங்கள் உறுதிபூண்டுள்ளோம்.</string>
+    <string name="about_title">பற்றி</string>
+    <string name="terms_conditions">விதிமுறைகள் மற்றும் நிபந்தனைகள்</string>
+    <string name="privacy_policy">தனியுரிமைக் கொள்கை</string>
+    <string name="logout">வெளியேறு</string>
+    <string name="cough">இருமல்</string>
+    <string name="snuffle">மூக்கு ஒழுகுதல்</string>
+    <string name="fever">காய்ச்சல்</string>
+    <string name="category">வகை</string>
+    <string name="neurologist">நரம்பியல் நிபுணர்</string>
+    <string name="orthopadist">எலும்பியல் நிபுணர்</string>
+    <string name="cardiologist">இதயநோய் நிபுணர்</string>
+    <string name="nefrologist">சிறுநீரக நிபுணர்</string>
+    <string name="recent_searches">அண்மைய தேடல்கள்</string>
+    <string name="dr_suraj_mankar">டாக்டர் சூரஜ் மன்கர்</string>
+    <string name="search_hint">தேடு</string>
+    <string name="back_description">பின்னோக்கி பொத்தான்</string>
+    <string name="appointments">நேர ஒதுக்கீடுகள்</string>
+    <string name="language">மொழியைத் தேர்ந்தெடு</string>
+    <string name="about_doctor">மருத்துவர் பற்றி</string>
+    <string name="reviews">மதிப்புரைகள்</string>
+    <string name="Book_appointment">நேரம் ஒதுக்கீடு செய்</string>
+    <string name="create_slots">இடங்களை உருவாக்கு</string>
+    <string name="clinic_time">மருத்துவமனை நேரம்</string>
+    <string name="opening_time">திறக்கும் நேரம்</string>
+    <string name="closing_time">மூடும் நேரம்</string>
+    <string name="slot_duration">இட நீளம்</string>
+    <string name="hours">மணிகள்</string>
+    <string name="mins">நிமிடங்கள்</string>
+    <string name="max_person_per_slot">ஒரு இடத்திற்கு அதிகபட்ச நபர்கள்</string>
+    <string name="create_slot">இடத்தை உருவாக்கு</string>
+    <string name="accept">ஏற்கவும்</string>
+    <string name="decline">நிராகரி</string>
+    <string name="doctor_message">நோயாளி மையப்படுத்தப்பட்ட, ஆதார அடிப்படையிலான பராமரிப்புக்கு அர்ப்பணிக்கப்பட்ட இரக்கமுள்ள மருத்துவர்.</string>
+</resources>
