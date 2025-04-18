@@ -14,12 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
+
+        <activity
+            android:name=".Activities.payment"
+            android:exported="false" />
         <activity
             android:name=".Activities.Splashactivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,6 +39,7 @@
         <activity android:name=".Activities.search_doctor" />
         <activity android:name=".Activities.doctor_info_card" />
         <activity android:name=".Activities.BookingActivity" />
+
     </application>
 
 </manifest>

@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation ("com.google.firebase:firebase-firestore:25.1.1")
+    implementation ("com.razorpay:checkout:1.6.40")
 
     // responsive UI using sdp
     implementation ("com.intuit.sdp:sdp-android:1.1.1")

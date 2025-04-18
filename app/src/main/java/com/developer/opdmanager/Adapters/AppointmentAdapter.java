@@ -5,6 +5,7 @@ import static java.security.AccessController.getContext;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.developer.opdmanager.Activities.payment;
 import com.developer.opdmanager.Models.Appointment;
 import com.developer.opdmanager.Models.CompletedAppointment;
 import com.developer.opdmanager.Models.Review;
@@ -61,9 +63,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     public void onPayClick(int position) {
         // Handle Pay button click
-        CompletedAppointment appointment = appointmentList.get(position);
-        // Example: Start a payment activity
-        // Toast.makeText(getContext(), "Pay for " + appointment.getDoctorName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Pay now", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(context, payment.class);
+        context.startActivity(intent);
     }
 
     @Override

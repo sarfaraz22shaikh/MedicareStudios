@@ -211,6 +211,7 @@ public class doctor_info_card extends AppCompatActivity {
                 });
     }
 
+
     // Dial the given Phone Number
     private void dialPhoneNumber(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
